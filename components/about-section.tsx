@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Brain, Users, Rocket, Award } from "lucide-react"
@@ -106,22 +107,34 @@ export const AboutSection = () => {
                   just functional, but scalable, maintainable, and aligned with business objectives.
                 </p>
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                  <span className="text-sm">10+ Years of Software Engineering Excellence</span>
+              <div className="flex flex-col items-center">
+                <div className="w-48 h-48 rounded-2xl overflow-hidden shadow-xl mb-6 ring-4 ring-white/10 dark:ring-gray-800/50">
+                  <Image
+                    src="/profile_low.jpg"
+                    alt="Shayan Yousefian - Senior Software Engineer"
+                    width={192}
+                    height={192}
+                    className="w-full h-full object-cover"
+                    sizes="(max-width: 768px) 160px, 192px"
+                  />
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                  <span className="text-sm">35M+ Monthly Visits Delivered</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                  <span className="text-sm">$400K+ Annual Cost Savings Achieved</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                  <span className="text-sm">Multiple Teams Successfully Led</span>
+                <div className="space-y-4 text-center">
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                    <span className="text-sm">10+ Years of Software Engineering Excellence</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                    <span className="text-sm">35M+ Monthly Visits Delivered</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    <span className="text-sm">$400K+ Annual Cost Savings Achieved</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                    <span className="text-sm">Multiple Teams Successfully Led</span>
+                  </div>
                 </div>
               </div>
             </div>
