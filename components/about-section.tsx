@@ -9,23 +9,23 @@ import { Brain, Users, Rocket, Award } from "lucide-react"
 const highlights = [
   {
     icon: Brain,
-    title: "AI & ML Pioneer",
-    description: "Leading the development of cutting-edge LLM applications and RAG systems",
+    title: "AI/ML Systems Development",
+    description: "Built enterprise RAG systems and LLM integration platforms using LangChain and FastAPI",
   },
   {
     icon: Users,
-    title: "Team Leadership",
-    description: "Successfully managed remote engineering teams delivering scalable solutions",
+    title: "Engineering Team Leadership",
+    description: "Led remote engineering teams and mentored developers, resulting in promotions and growth",
   },
   {
     icon: Rocket,
-    title: "Performance Optimizer",
-    description: "Achieved 500K daily visits and $400K annual cost savings through innovation",
+    title: "Performance Optimization",
+    description: "Delivered 500K+ daily visits and cut infrastructure costs by $400K+ annually",
   },
   {
     icon: Award,
-    title: "Full-Stack Expertise",
-    description: "10+ years of experience across the entire technology stack",
+    title: "Full-Stack Excellence",
+    description: "Architected scalable web solutions serving 35M+ monthly users with high availability",
   },
 ]
 
@@ -63,16 +63,14 @@ export const AboutSection = () => {
               About Me
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Crafting Digital Excellence Through
+              Driving Scalable Solutions Through
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {" "}
                 Innovation
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              With over a decade of experience in software engineering, I specialize in building scalable,
-              high-performance applications that drive business growth. My journey spans from full-stack development to
-              AI innovation, always with a focus on delivering exceptional user experiences and technical excellence.
+              <span className="font-bold">10+ years of software engineering experience</span> specializing in <span className="text-blue-600 font-bold">AI/ML systems and high-scale web applications</span>. I've <span className="font-bold">built systems serving 35M+ monthly users</span>, led engineering teams through critical product launches, and <span className="font-bold">reduced infrastructure costs by $400K+ annually</span> through strategic technical decisions.
             </p>
           </div>
 
@@ -133,7 +131,7 @@ export const AboutSection = () => {
                   </div>
                   <div className="flex items-center justify-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-orange-500"></div>
-                    <span className="text-sm">Multiple Teams Successfully Led</span>
+                    <span className="text-sm">Team Leadership & Mentorship Excellence</span>
                   </div>
                 </div>
               </div>

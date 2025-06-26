@@ -63,12 +63,11 @@ export const HeroSection = () => {
           </h1>
 
           <h2 className="text-2xl md:text-3xl text-muted-foreground mb-6 font-light">
-            Senior Software Engineer & AI Innovator
+            Senior Software Engineer & AI Leader
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            Transforming complex challenges into elegant solutions with cutting-edge AI, full-stack development, and
-            team leadership expertise. Currently architecting the future of AI-powered applications at Sway AI.
+            <span className="font-bold">Senior Software Engineer</span> with expertise in <span className="text-blue-600 font-bold">AI/ML systems and scalable web applications serving 35M+ monthly users</span>. <span className="font-bold">Led engineering teams</span> and delivered <span className="text-blue-600 font-bold">$400K+ in annual cost savings</span> through strategic technical decisions and process optimization.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

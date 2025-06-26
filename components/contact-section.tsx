@@ -74,15 +74,10 @@ export const ContactSection = () => {
               Get In Touch
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Let's Build Something
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {" "}
-                Extraordinary
-              </span>
+              Let's Build <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Scalable Solutions</span> Together
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Ready to discuss your next project, explore collaboration opportunities, or simply connect? I'm always
-              excited to hear about new challenges and innovations.
+              Looking for a <span className="font-bold">senior engineering leader</span> who can architect AI systems, scale teams, and deliver measurable business impact? Let's discuss how my experience building systems for 35M+ users can drive your next breakthrough.
             </p>
           </div>
 
@@ -140,7 +135,7 @@ export const ContactSection = () => {
                   <Card className="p-6 bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                     <div className="flex items-center gap-3 mb-4">
                       <Send className="h-6 w-6" />
-                      <h4 className="text-xl font-semibold">Send me an email</h4>
+                      <h4 className="text-xl font-semibold">Let's Chat</h4>
                     </div>
                     <p className="mb-4 opacity-90">
                       The fastest way to reach me is via email. I typically respond within 24 hours.
@@ -150,14 +145,14 @@ export const ContactSection = () => {
                       className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-transparent text-white hover:bg-white/10 hover:text-white h-11 px-8 w-full"
                     >
                       <Mail className="mr-2 h-4 w-4" />
-                      Send Email
+                      Let's Chat
                     </a>
                   </Card>
 
                   <Card className="p-6">
                     <div className="flex items-center gap-3 mb-4">
                       <Calendar className="h-6 w-6 text-blue-500" />
-                      <h4 className="text-xl font-semibold">Schedule a call</h4>
+                      <h4 className="text-xl font-semibold">Book a Call</h4>
                     </div>
                     <p className="text-muted-foreground mb-4">
                       Prefer to discuss over a call? Let's schedule a time that works for both of us.
@@ -169,14 +164,14 @@ export const ContactSection = () => {
                       className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8 w-full"
                     >
                       <Calendar className="mr-2 h-4 w-4" />
-                      Schedule Meeting
+                      Book Now
                     </a>
                   </Card>
 
                   <div className="text-center p-6 bg-muted/50 rounded-xl">
                     <h4 className="font-semibold mb-2">Open to Opportunities</h4>
                     <p className="text-sm text-muted-foreground">
-                      Senior Software Engineering roles • AI/ML Projects • Technical Leadership • Consulting
+                      Senior/Lead Software Engineer • AI/ML Architecture • Engineering Management • Technical Advisory
                     </p>
                   </div>
                 </div>
@@ -186,7 +181,7 @@ export const ContactSection = () => {
             {/* Footer */}
             <div className="text-center pt-8 border-t">
               <p className="text-muted-foreground">
-                © 2024 Shayan Yousefian. Crafted with passion for innovation and excellence.
+                © 2025 Shayan Yousefian. Crafted with passion for innovation and excellence.
               </p>
             </div>
           </div>

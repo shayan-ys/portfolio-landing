@@ -126,15 +126,10 @@ export const SkillsSection = () => {
               Technical Expertise
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Mastering the
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {" "}
-                Tech Stack
-              </span>
+              Mastering the Tech Stack & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Architecture</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              A comprehensive toolkit spanning AI/ML, full-stack development, cloud infrastructure, and team leadership
-              - built through years of hands-on experience and continuous learning.
+              <span className="font-bold">Senior-level expertise</span> in system architecture, team leadership, and AI/ML implementation. Proven ability to <span className="font-bold">design scalable systems</span>, mentor engineering teams, and drive technical decisions that impact millions of users and save hundreds of thousands in operational costs.
             </p>
           </div>
 
