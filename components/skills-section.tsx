@@ -140,11 +140,14 @@ export const SkillsSection = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {skillCategories.map((category, index) => (
-              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <Card
+                key={index}
+                className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-1"
+              >
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-2">
                     <div
-                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300`}
                     >
                       <category.icon className="h-5 w-5 text-white" />
                     </div>

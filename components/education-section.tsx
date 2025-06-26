@@ -52,14 +52,14 @@ export const EducationSection = () => {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <Card className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300">
                     <GraduationCap className="h-8 w-8 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl group-hover:text-blue-600 transition-colors">
+                    <CardTitle className="text-2xl md:group-hover:text-blue-600 md:transition-colors">
                       Master of Science in Computer Science
                     </CardTitle>
                     <p className="text-lg text-muted-foreground">Brock University, St. Catharines, ON</p>
@@ -132,9 +132,9 @@ export const EducationSection = () => {
             </Card>
 
             <div className="mt-12 grid md:grid-cols-3 gap-6">
-              <Card className="text-center group hover:shadow-lg transition-all duration-300">
+              <Card className="text-center group md:hover:shadow-lg md:transition-all md:duration-300">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300">
                     <Award className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="font-semibold mb-2">Research Excellence</h3>
@@ -144,9 +144,9 @@ export const EducationSection = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center group hover:shadow-lg transition-all duration-300">
+              <Card className="text-center group md:hover:shadow-lg md:transition-all md:duration-300">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300">
                     <Brain className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="font-semibold mb-2">AI Specialization</h3>
@@ -156,9 +156,9 @@ export const EducationSection = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center group hover:shadow-lg transition-all duration-300">
+              <Card className="text-center group md:hover:shadow-lg md:transition-all md:duration-300">
                 <CardContent className="p-6">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300">
                     <BookOpen className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="font-semibold mb-2">Academic Rigor</h3>

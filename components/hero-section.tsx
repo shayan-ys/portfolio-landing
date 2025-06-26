@@ -15,6 +15,10 @@ export const HeroSection = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })
   }
 
+  const handleScrollToContact = () => {
+    document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       {/* Animated Background */}
@@ -23,7 +27,7 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div
-          className={`text-center transition-all duration-1000 ${
+          className={`text-center transition-all duration-1000 pt-20 sm:pt-8 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
@@ -59,12 +63,17 @@ export const HeroSection = () => {
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://www.linkedin.com/in/shayanys/"
+                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Linkedin className="h-4 w-4" />
                 </a>
               </Button>
               <Button variant="outline" size="icon" asChild>
-                <a href="#" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/shayan-ys" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
                   <Github className="h-4 w-4" />
                 </a>
               </Button>
@@ -75,21 +84,21 @@ export const HeroSection = () => {
             <Button
               size="lg"
               onClick={handleScrollToAbout}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
             >
               Explore My Work
               <ArrowDown className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <a href="mailto:info@shayanys.com">Get In Touch</a>
+            <Button size="lg" variant="outline" onClick={handleScrollToContact}>
+              Get In Touch
             </Button>
           </div>
-        </div>
-      </div>
 
-      {/* Floating Animation */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ArrowDown className="h-6 w-6 text-muted-foreground" />
+          {/* Floating Animation */}
+          <div className="flex justify-center mt-12 animate-bounce">
+            <ArrowDown className="h-6 w-6 text-muted-foreground" />
+          </div>
+        </div>
       </div>
     </section>
   )

@@ -77,9 +77,12 @@ export const AboutSection = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {highlights.map((highlight, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card
+                key={index}
+                className="group md:hover:shadow-lg md:transition-all md:duration-300 md:hover:-translate-y-1"
+              >
                 <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300">
                     <highlight.icon className="h-6 w-6 text-white" />
                   </div>
                   <h3 className="font-semibold mb-2">{highlight.title}</h3>

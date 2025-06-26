@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Mail, Linkedin, Github, MapPin, Phone, Send, Calendar } from "lucide-react"
 
@@ -46,14 +45,14 @@ export const ContactSection = () => {
       icon: Linkedin,
       label: "LinkedIn",
       value: "Connect with me",
-      href: "#",
+      href: "https://www.linkedin.com/in/shayanys/",
       color: "from-blue-600 to-blue-700",
     },
     {
       icon: Github,
       label: "GitHub",
       value: "View my code",
-      href: "#",
+      href: "https://github.com/shayan-ys",
       color: "from-gray-700 to-gray-900",
     },
   ]
@@ -96,7 +95,7 @@ export const ContactSection = () => {
                   {contactMethods.map((method, index) => (
                     <Card
                       key={index}
-                      className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                      className="group md:hover:shadow-lg md:transition-all md:duration-300 md:hover:-translate-y-1"
                     >
                       <CardContent className="p-4">
                         <a
@@ -106,12 +105,14 @@ export const ContactSection = () => {
                           rel={method.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         >
                           <div
-                            className={`w-12 h-12 rounded-xl bg-gradient-to-br ${method.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                            className={`w-12 h-12 rounded-xl bg-gradient-to-br ${method.color} flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300`}
                           >
                             <method.icon className="h-5 w-5 text-white" />
                           </div>
                           <div>
-                            <p className="font-medium group-hover:text-blue-600 transition-colors">{method.label}</p>
+                            <p className="font-medium md:group-hover:text-blue-600 md:transition-colors">
+                              {method.label}
+                            </p>
                             <p className="text-sm text-muted-foreground">{method.value}</p>
                           </div>
                         </a>
@@ -144,12 +145,13 @@ export const ContactSection = () => {
                     <p className="mb-4 opacity-90">
                       The fastest way to reach me is via email. I typically respond within 24 hours.
                     </p>
-                    <Button size="lg" variant="secondary" className="w-full" asChild>
-                      <a href="mailto:info@shayanys.com">
-                        <Mail className="mr-2 h-4 w-4" />
-                        Send Email
-                      </a>
-                    </Button>
+                    <a
+                      href="mailto:info@shayanys.com"
+                      className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-transparent text-white hover:bg-white/10 hover:text-white h-11 px-8 w-full"
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Send Email
+                    </a>
                   </Card>
 
                   <Card className="p-6">
@@ -160,10 +162,15 @@ export const ContactSection = () => {
                     <p className="text-muted-foreground mb-4">
                       Prefer to discuss over a call? Let's schedule a time that works for both of us.
                     </p>
-                    <Button size="lg" variant="outline" className="w-full">
+                    <a
+                      href="https://cal.com/shayanys/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8 w-full"
+                    >
                       <Calendar className="mr-2 h-4 w-4" />
                       Schedule Meeting
-                    </Button>
+                    </a>
                   </Card>
 
                   <div className="text-center p-6 bg-muted/50 rounded-xl">

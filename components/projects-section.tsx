@@ -125,17 +125,17 @@ export const ProjectsSection = () => {
             {projects.map((project, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full"
+                className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-2 h-full"
               >
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-3">
                     <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${project.color} flex items-center justify-center md:group-hover:scale-110 md:transition-transform md:duration-300`}
                     >
                       <project.icon className="h-6 w-6 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-lg group-hover:text-blue-600 transition-colors">
+                      <CardTitle className="text-lg md:group-hover:text-blue-600 md:transition-colors">
                         {project.title}
                       </CardTitle>
                       <p className="text-sm text-muted-foreground">{project.company}</p>
@@ -174,7 +174,7 @@ export const ProjectsSection = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full mt-auto group-hover:bg-blue-50 dark:group-hover:bg-blue-950"
+                    className="w-full mt-auto md:group-hover:bg-blue-50 dark:md:group-hover:bg-blue-950"
                   >
                     View Details
                     <ExternalLink className="ml-2 h-3 w-3" />
@@ -193,7 +193,10 @@ export const ProjectsSection = () => {
               </p>
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 md:hover:from-blue-700 md:hover:to-purple-700 text-white"
+                onClick={() => {
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+                }}
               >
                 Start a Conversation
               </Button>

@@ -135,7 +135,7 @@ export const ExperienceSection = () => {
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-500 to-purple-500 hidden md:block"></div>
 
             <div className="space-y-12">
               {experiences.map((exp, index) => (
@@ -144,10 +144,10 @@ export const ExperienceSection = () => {
                   className={`relative flex items-center ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full border-4 border-background shadow-lg z-10"></div>
+                  <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 md:-translate-x-1/2 w-4 h-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full border-4 border-background shadow-lg z-10 hidden md:block"></div>
 
                   <div className={`w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-8" : "md:pl-8"}`}>
-                    <Card className="ml-12 md:ml-0 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <Card className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-1">
                       <CardHeader>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
                           <Badge variant={exp.type === "Current Role" ? "default" : "secondary"} className="w-fit">
@@ -158,7 +158,7 @@ export const ExperienceSection = () => {
                             {exp.period}
                           </div>
                         </div>
-                        <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">
+                        <CardTitle className="text-xl md:group-hover:text-blue-600 md:transition-colors">
                           {exp.title}
                         </CardTitle>
                         <div className="flex items-center gap-2 text-muted-foreground">
