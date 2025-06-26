@@ -39,7 +39,7 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div
-          className={`text-center transition-all duration-1000 pt-20 sm:pt-8 ${
+          className={`text-center transition-all duration-1000 pt-20 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
@@ -67,7 +67,7 @@ export const HeroSection = () => {
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-            <span className="font-bold">Senior Software Engineer</span> with expertise in <span className="text-blue-600 font-bold">AI/ML systems and scalable web applications serving 35M+ monthly users</span>. <span className="font-bold">Led engineering teams</span> and delivered <span className="text-blue-600 font-bold">$400K+ in annual cost savings</span> through strategic technical decisions and process optimization.
+            <span className="font-bold">Senior Software Engineer</span> with expertise in <span className="text-blue-600 font-bold">AI/ML and scalable web applications serving 35M+ monthly users</span>. <span className="font-bold">Led engineering teams</span> through strategic decisions and process optimization, delivering <span className="text-blue-600 font-bold">$400K+ in annual cost savings</span>.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

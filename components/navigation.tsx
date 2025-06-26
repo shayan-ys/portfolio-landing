@@ -60,12 +60,21 @@ export const Navigation = () => {
             role="banner"
           >
             <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+              {/* White logo for light mode */}
+              <Image
+                src="/logo-smaller-white.png"
+                alt="Shayan Yousefian Logo"
+                width={32}
+                height={32}
+                className="w-full h-full object-contain rounded-md block dark:hidden"
+              />
+              {/* Dark logo for dark mode */}
               <Image
                 src="/logo-smaller.png"
                 alt="Shayan Yousefian Logo"
                 width={32}
                 height={32}
-                className="w-full h-full object-contain rounded-md"
+                className="w-full h-full object-contain rounded-md hidden dark:block"
               />
             </div>
             <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
