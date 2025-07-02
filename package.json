@@ -4,8 +4,6 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:optimized": "next build && node scripts/critical-css.js",
-    "critical-css": "node scripts/critical-css.js",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
