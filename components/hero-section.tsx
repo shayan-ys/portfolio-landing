@@ -135,7 +135,6 @@ export const HeroSection = () => {
                 <a 
                   href="mailto:info@shayanys.com" 
                   aria-label="Send email to Shayan Yousefian"
-                  role="listitem"
                 >
                   <Mail className="h-4 w-4" />
                 </a>
@@ -153,7 +152,6 @@ export const HeroSection = () => {
                   aria-label="Visit Shayan Yousefian's LinkedIn profile"
                   target="_blank"
                   rel="noopener noreferrer"
-                  role="listitem"
                 >
                   <Linkedin className="h-4 w-4" />
                 </a>
@@ -171,7 +169,6 @@ export const HeroSection = () => {
                   aria-label="Visit Shayan Yousefian's GitHub profile" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  role="listitem"
                 >
                   <Github className="h-4 w-4" />
                 </a>
@@ -190,7 +187,6 @@ export const HeroSection = () => {
               onClick={handleScrollToAbout}
               onKeyDown={(e) => handleKeyDown(e, handleScrollToAbout)}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hero-button"
-              aria-label="Scroll to about section"
             >
               Explore My Work
               <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -201,7 +197,6 @@ export const HeroSection = () => {
               onClick={handleDownloadResume}
               onKeyDown={(e) => handleKeyDown(e, handleDownloadResume)}
               className="hero-button relative bg-gradient-to-r from-blue-600 to-purple-600 p-[2px] rounded-md hover:from-blue-700 hover:to-purple-700"
-              aria-label="Download resume PDF"
             >
               <span className="flex items-center bg-background dark:bg-background rounded-[4px] px-4 py-2 text-foreground hover:bg-blue-50 dark:hover:bg-gray-800/50 transition-colors">
                 <Download className="mr-2 h-4 w-4" aria-hidden="true" />
@@ -214,7 +209,6 @@ export const HeroSection = () => {
               onClick={handleScrollToContact}
               onKeyDown={(e) => handleKeyDown(e, handleScrollToContact)}
               className="hero-button"
-              aria-label="Scroll to contact section"
             >
               Get In Touch
             </Button>
