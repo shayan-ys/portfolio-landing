@@ -123,7 +123,7 @@ export const HeroSection = () => {
               <MapPin className="h-4 w-4" aria-hidden="true" />
               <span>Toronto, Canada</span>
             </div>
-            <div className="flex items-center gap-4" role="list" aria-label="Social links">
+            <div className="flex items-center gap-4" role="group" aria-label="Social links">
               <Button 
                 variant="outline" 
                 size="icon" 
