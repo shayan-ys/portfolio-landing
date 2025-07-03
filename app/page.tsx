@@ -18,6 +18,8 @@ export default function Portfolio() {
           aria-label="Main content"
           tabIndex={-1}
         >
+          {/* Hidden heading for document structure */}
+          <h1 className="sr-only">Shayan Yousefian - Portfolio</h1>
           <HeroSection />
           <AboutSection />
           <ExperienceSection />

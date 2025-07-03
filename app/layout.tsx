@@ -88,9 +88,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" aria-hidden="false">
+      <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div id="root" role="document">
+          <div id="root">
             {children}
           </div>
         </ThemeProvider>
@@ -102,19 +102,70 @@ export default function RootLayout({
               (function() {
                 const observer = new MutationObserver(function(mutations) {
                   mutations.forEach(function(mutation) {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-aria-hidden') {
+                    if (mutation.type === 'attributes' && 
+                        (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'data-aria-hidden')) {
                       const target = mutation.target;
-                      if (target.hasAttribute('data-aria-hidden') && target.contains(document.getElementById('main-content'))) {
-                        target.removeAttribute('data-aria-hidden');
+                      const mainContent = document.getElementById('main-content');
+                      
+                      // Remove aria-hidden if it's applied to elements containing main content
+                      if (mainContent && target.contains(mainContent)) {
+                        if (target.hasAttribute('aria-hidden')) {
+                          target.removeAttribute('aria-hidden');
+                        }
+                        if (target.hasAttribute('data-aria-hidden')) {
+                          target.removeAttribute('data-aria-hidden');
+                        }
+                      }
+                      
+                      // Specifically protect the root element and body
+                      if (target.id === 'root' || target === document.body || target === document.documentElement) {
+                        if (target.hasAttribute('aria-hidden')) {
+                          target.removeAttribute('aria-hidden');
+                        }
+                        if (target.hasAttribute('data-aria-hidden')) {
+                          target.removeAttribute('data-aria-hidden');
+                        }
                       }
                     }
                   });
                 });
                 
-                if (document.body) {
+                // Function to ensure main element is properly configured
+                function ensureMainLandmark() {
+                  const mainContent = document.getElementById('main-content');
+                  if (mainContent) {
+                    // Ensure main element has proper attributes
+                    if (!mainContent.getAttribute('role')) {
+                      mainContent.setAttribute('role', 'main');
+                    }
+                    if (!mainContent.getAttribute('aria-label')) {
+                      mainContent.setAttribute('aria-label', 'Main content');
+                    }
+                    // Remove any inappropriate aria-hidden attributes
+                    if (mainContent.hasAttribute('aria-hidden')) {
+                      mainContent.removeAttribute('aria-hidden');
+                    }
+                    if (mainContent.hasAttribute('data-aria-hidden')) {
+                      mainContent.removeAttribute('data-aria-hidden');
+                    }
+                  }
+                }
+                
+                // Start observing once DOM is ready
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', function() {
+                    ensureMainLandmark();
+                    observer.observe(document.body, {
+                      attributes: true,
+                      attributeFilter: ['aria-hidden', 'data-aria-hidden'],
+                      subtree: true
+                    });
+                  });
+                } else {
+                  ensureMainLandmark();
                   observer.observe(document.body, {
                     attributes: true,
-                    attributeFilter: ['data-aria-hidden'],
+                    attributeFilter: ['aria-hidden', 'data-aria-hidden'],
                     subtree: true
                   });
                 }
