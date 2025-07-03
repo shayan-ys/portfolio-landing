@@ -14,6 +14,7 @@ const navItems = [
   { href: "#projects", label: "Projects" },
   { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
+  { href: "resume", label: "Resume" },
 ]
 
 export const Navigation = () => {
@@ -30,8 +31,15 @@ export const Navigation = () => {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false)
-    const element = document.querySelector(href)
-    element?.scrollIntoView({ behavior: "smooth" })
+    if (href === "resume") {
+      const link = document.createElement('a')
+      link.href = '/resume.pdf'
+      link.download = 'Shayan_Yousefian_Resume.pdf'
+      link.click()
+    } else {
+      const element = document.querySelector(href)
+      element?.scrollIntoView({ behavior: "smooth" })
+    }
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, href: string) => {

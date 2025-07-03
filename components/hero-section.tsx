@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import { ArrowDown, Github, Linkedin, Mail, MapPin, Download } from "lucide-react"
 
 export const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -23,6 +23,13 @@ export const HeroSection = () => {
 
   const handleScrollToContact = () => {
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a')
+    link.href = '/resume.pdf'
+    link.download = 'Shayan_Yousefian_Resume.pdf'
+    link.click()
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
@@ -187,6 +194,19 @@ export const HeroSection = () => {
             >
               Explore My Work
               <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={handleDownloadResume}
+              onKeyDown={(e) => handleKeyDown(e, handleDownloadResume)}
+              className="hero-button relative bg-gradient-to-r from-blue-600 to-purple-600 p-[2px] rounded-md hover:from-blue-700 hover:to-purple-700"
+              aria-label="Download resume PDF"
+            >
+              <span className="flex items-center bg-background dark:bg-background rounded-[4px] px-4 py-2 text-foreground hover:bg-blue-50 dark:hover:bg-gray-800/50 transition-colors">
+                <Download className="mr-2 h-4 w-4" aria-hidden="true" />
+                Download Resume
+              </span>
             </Button>
             <Button 
               size="lg" 
