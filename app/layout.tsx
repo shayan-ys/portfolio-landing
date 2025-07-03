@@ -90,9 +90,89 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <div id="root">
+            {children}
+          </div>
         </ThemeProvider>
         <SpeedInsights />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Defensive measure against inappropriate aria-hidden attributes
+              (function() {
+                const observer = new MutationObserver(function(mutations) {
+                  mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && 
+                        (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'data-aria-hidden')) {
+                      const target = mutation.target;
+                      const mainContent = document.getElementById('main-content');
+                      
+                      // Remove aria-hidden if it's applied to elements containing main content
+                      if (mainContent && target.contains(mainContent)) {
+                        if (target.hasAttribute('aria-hidden')) {
+                          target.removeAttribute('aria-hidden');
+                        }
+                        if (target.hasAttribute('data-aria-hidden')) {
+                          target.removeAttribute('data-aria-hidden');
+                        }
+                      }
+                      
+                      // Specifically protect the root element and body
+                      if (target.id === 'root' || target === document.body || target === document.documentElement) {
+                        if (target.hasAttribute('aria-hidden')) {
+                          target.removeAttribute('aria-hidden');
+                        }
+                        if (target.hasAttribute('data-aria-hidden')) {
+                          target.removeAttribute('data-aria-hidden');
+                        }
+                      }
+                    }
+                  });
+                });
+                
+                // Function to ensure main element is properly configured
+                function ensureMainLandmark() {
+                  const mainContent = document.getElementById('main-content');
+                  if (mainContent) {
+                    // Ensure main element has proper attributes
+                    if (!mainContent.getAttribute('role')) {
+                      mainContent.setAttribute('role', 'main');
+                    }
+                    if (!mainContent.getAttribute('aria-label')) {
+                      mainContent.setAttribute('aria-label', 'Main content');
+                    }
+                    // Remove any inappropriate aria-hidden attributes
+                    if (mainContent.hasAttribute('aria-hidden')) {
+                      mainContent.removeAttribute('aria-hidden');
+                    }
+                    if (mainContent.hasAttribute('data-aria-hidden')) {
+                      mainContent.removeAttribute('data-aria-hidden');
+                    }
+                  }
+                }
+                
+                // Start observing once DOM is ready
+                if (document.readyState === 'loading') {
+                  document.addEventListener('DOMContentLoaded', function() {
+                    ensureMainLandmark();
+                    observer.observe(document.body, {
+                      attributes: true,
+                      attributeFilter: ['aria-hidden', 'data-aria-hidden'],
+                      subtree: true
+                    });
+                  });
+                } else {
+                  ensureMainLandmark();
+                  observer.observe(document.body, {
+                    attributes: true,
+                    attributeFilter: ['aria-hidden', 'data-aria-hidden'],
+                    subtree: true
+                  });
+                }
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   )

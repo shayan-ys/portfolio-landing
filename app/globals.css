@@ -30,15 +30,14 @@ body {
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
+    --border: 0 0% 89.1%;
+    --input: 0 0% 89.1%;
     --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -47,6 +46,7 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -90,5 +90,304 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Simple Hero Animations */
+@layer components {
+  /* Base animation classes */
+  .hero-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .hero-animate.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Profile image animation */
+  .hero-profile {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .hero-profile.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Social icons animation */
+  .hero-social {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .hero-social.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered delays */
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+  .delay-400 { transition-delay: 400ms; }
+  .delay-500 { transition-delay: 500ms; }
+  .delay-600 { transition-delay: 600ms; }
+  .delay-700 { transition-delay: 700ms; }
+  .delay-800 { transition-delay: 800ms; }
+
+  /* Button hover animations */
+  .hero-button {
+    transition: transform 0.2s ease-out;
+  }
+  
+  .hero-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .hero-button:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  /* Bounce animation */
+  .hero-bounce {
+    animation: bounce-smooth 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce-smooth {
+    0%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-8px);
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .hero-animate,
+    .hero-profile,
+    .hero-social {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    
+    .hero-button:hover {
+      transform: none;
+    }
+    
+    .hero-bounce {
+      animation: none;
+    }
+  }
+
+  /* Respect user motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate,
+    .hero-profile,
+    .hero-social,
+    .hero-button,
+    .hero-bounce,
+    .shooting-star-h,
+    .shooting-star-v {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+    
+    .shooting-star-h,
+    .shooting-star-v {
+      opacity: 0;
+    }
+    
+    .hero-button:hover {
+      transform: none;
+    }
+  }
+
+  /* Shooting Stars Animation System */
+  
+  /* Base shooting star styles */
+  .shooting-star-h,
+  .shooting-star-v {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+    opacity: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  /* Horizontal shooting stars */
+  .shooting-star-h {
+    animation: shootHorizontal 8s linear infinite;
+  }
+
+  .shooting-star-h::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -80px;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, currentColor);
+    border-radius: 1px;
+  }
+
+  /* Vertical shooting stars */
+  .shooting-star-v {
+    animation: shootVertical 8s linear infinite;
+  }
+
+  .shooting-star-v::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -1px;
+    width: 2px;
+    height: 80px;
+    background: linear-gradient(180deg, transparent, currentColor);
+    border-radius: 1px;
+  }
+
+  /* Muted color variations */
+  .shooting-star-blue {
+    color: rgb(147 197 253 / 0.6); /* blue-300 with opacity */
+  }
+
+  .shooting-star-purple {
+    color: rgb(196 181 253 / 0.6); /* purple-300 with opacity */
+  }
+
+  .shooting-star-teal {
+    color: rgb(134 239 172 / 0.6); /* teal-300 with opacity */
+  }
+
+  .shooting-star-indigo {
+    color: rgb(165 180 252 / 0.6); /* indigo-300 with opacity */
+  }
+
+  .shooting-star-emerald {
+    color: rgb(110 231 183 / 0.6); /* emerald-300 with opacity */
+  }
+
+  .shooting-star-rose {
+    color: rgb(253 164 175 / 0.6); /* rose-300 with opacity */
+  }
+
+  .shooting-star-amber {
+    color: rgb(252 211 77 / 0.6); /* amber-300 with opacity */
+  }
+
+  .shooting-star-cyan {
+    color: rgb(103 232 249 / 0.6); /* cyan-300 with opacity */
+  }
+
+  /* Dark mode adjustments for shooting stars */
+  .dark .shooting-star-blue {
+    color: rgb(147 197 253 / 0.15); /* Further reduced opacity for dark mode */
+  }
+
+  .dark .shooting-star-purple {
+    color: rgb(196 181 253 / 0.15);
+  }
+
+  .dark .shooting-star-teal {
+    color: rgb(134 239 172 / 0.15);
+  }
+
+  .dark .shooting-star-indigo {
+    color: rgb(165 180 252 / 0.15);
+  }
+
+  .dark .shooting-star-emerald {
+    color: rgb(110 231 183 / 0.15);
+  }
+
+  .dark .shooting-star-rose {
+    color: rgb(253 164 175 / 0.15);
+  }
+
+  .dark .shooting-star-amber {
+    color: rgb(252 211 77 / 0.15);
+  }
+
+  .dark .shooting-star-cyan {
+    color: rgb(103 232 249 / 0.15);
+  }
+
+  /* Keyframe animations */
+  @keyframes shootHorizontal {
+    0% {
+      transform: translate3d(-100px, 0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(calc(100vw + 100px), 0, 0);
+      opacity: 0;
+    }
+  }
+
+  @keyframes shootVertical {
+    0% {
+      transform: translate3d(0, -100px, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, calc(100vh + 100px), 0);
+      opacity: 0;
+    }
+  }
+
+  /* Mobile and performance optimizations */
+  @media (max-width: 768px) {
+    .shooting-star-h,
+    .shooting-star-v {
+      animation-duration: 6s; /* Faster on mobile */
+      width: 3px;
+      height: 3px;
+      box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+    }
+    
+    .shooting-star-h::before {
+      width: 60px;
+      height: 2px;
+      left: -60px;
+    }
+    
+    .shooting-star-v::before {
+      width: 2px;
+      height: 60px;
+      top: -60px;
+    }
+  }
+
+  /* High performance displays */
+  @media (min-resolution: 2dppx) {
+    .shooting-star-h,
+    .shooting-star-v {
+      transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+    }
   }
 }

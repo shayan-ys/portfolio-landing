@@ -63,9 +63,8 @@ export const AboutSection = () => {
               About Me
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Driving Scalable Solutions Through
+              <span>Driving Scalable Solutions Through </span>
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {" "}
                 Innovation
               </span>
             </h2>

@@ -157,7 +157,11 @@ export const SkillsSection = () => {
                           <span className="text-sm font-medium">{skill.name}</span>
                           <span className="text-xs text-muted-foreground">{skill.level}%</span>
                         </div>
-                        <Progress value={animatedSkills[skill.name] || 0} className="h-2" />
+                        <Progress 
+                          value={animatedSkills[skill.name] || 0} 
+                          className="h-2" 
+                          aria-label={`${skill.name} proficiency level: ${skill.level}%`}
+                        />
                       </div>
                     ))}
                   </div>

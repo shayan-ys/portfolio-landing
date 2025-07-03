@@ -109,9 +109,8 @@ export const ProjectsSection = () => {
               Featured Projects
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Transforming Ideas Into
+              <span>Transforming Ideas Into </span>
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {" "}
                 Impact
               </span>
             </h2>
