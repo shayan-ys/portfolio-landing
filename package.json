@@ -17,7 +17,7 @@
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "commit-msg": "commitlint --edit $1",
-    "a11y:lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "a11y:lint": "next lint --max-warnings 0",
     "a11y:lighthouse": "lhci autorun",
     "a11y:lighthouse-ci": "lhci autorun --config=lighthouserc.json",
     "a11y:test": "npm run a11y:lint && npm run build && npm run a11y:lighthouse-ci",
