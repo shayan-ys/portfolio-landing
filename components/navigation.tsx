@@ -7,14 +7,12 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
 const navItems = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
   { href: "#education", label: "Education" },
   { href: "#contact", label: "Contact" },
-  { href: "resume", label: "Resume" },
+  { href: "resume", label: "Download Resume" },
 ]
 
 export const Navigation = () => {
@@ -42,10 +40,21 @@ export const Navigation = () => {
     }
   }
 
+  const handleBannerClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
   const handleKeyDown = (event: React.KeyboardEvent, href: string) => {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault()
       handleNavClick(href)
+    }
+  }
+
+  const handleBannerKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault()
+      handleBannerClick()
     }
   }
 
@@ -88,33 +97,41 @@ export const Navigation = () => {
               className="flex items-center gap-3"
               role="banner"
             >
-              <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1">
-                {/* White logo for light mode */}
-                <Image
-                  src="/logo-smaller-white.png"
-                  alt="Shayan Yousefian Logo"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-contain rounded-md block dark:hidden"
-                />
-                {/* Dark logo for dark mode */}
-                <Image
-                  src="/logo-smaller.png"
-                  alt="Shayan Yousefian Logo"
-                  width={32}
-                  height={32}
-                  className="w-full h-full object-contain rounded-md hidden dark:block"
-                />
-              </div>
-              <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Shayan Yousefian
-              </span>
+              <button 
+                className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1 transition-colors duration-200 hover:opacity-80"
+                onClick={handleBannerClick}
+                onKeyDown={handleBannerKeyDown}
+                aria-label="Go to top of page"
+                role="banner"
+              >
+                <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                  {/* White logo for light mode */}
+                  <Image
+                    src="/logo-smaller-white.png"
+                    alt="Shayan Yousefian Logo"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain rounded-md block dark:hidden"
+                  />
+                  {/* Dark logo for dark mode */}
+                  <Image
+                    src="/logo-smaller.png"
+                    alt="Shayan Yousefian Logo"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain rounded-md hidden dark:block"
+                  />
+                </div>
+                <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Shayan Yousefian
+                </span>
+              </button>
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-8">
               <ul className="flex items-center space-x-8" role="list">
-                {navItems.map((item) => (
+                {navItems.filter(item => item.href !== "resume").map((item) => (
                   <li key={item.href} role="listitem">
                     <button
                       onClick={() => handleNavClick(item.href)}
@@ -131,7 +148,7 @@ export const Navigation = () => {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden flex items-center space-x-2">
+            <div className="lg:hidden flex items-center space-x-2">
               <ThemeToggle />
               <Button 
                 variant="ghost" 
@@ -150,7 +167,7 @@ export const Navigation = () => {
           {isMobileMenuOpen && (
             <div 
               id="mobile-menu"
-              className="md:hidden bg-background border-t"
+              className="lg:hidden bg-background border-t"
               role="menu"
               aria-label="Mobile navigation menu"
             >
