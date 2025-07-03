@@ -88,11 +88,40 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased" aria-hidden="false">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <div id="root" role="document">
+            {children}
+          </div>
         </ThemeProvider>
         <SpeedInsights />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Defensive measure against inappropriate aria-hidden attributes
+              (function() {
+                const observer = new MutationObserver(function(mutations) {
+                  mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'data-aria-hidden') {
+                      const target = mutation.target;
+                      if (target.hasAttribute('data-aria-hidden') && target.contains(document.getElementById('main-content'))) {
+                        target.removeAttribute('data-aria-hidden');
+                      }
+                    }
+                  });
+                });
+                
+                if (document.body) {
+                  observer.observe(document.body, {
+                    attributes: true,
+                    attributeFilter: ['data-aria-hidden'],
+                    subtree: true
+                  });
+                }
+              })();
+            `,
+          }}
+        />
       </body>
     </html>
   )
