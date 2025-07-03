@@ -16,7 +16,7 @@ export const ContactSection = () => {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -74,10 +74,17 @@ export const ContactSection = () => {
               Get In Touch
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Let's Build <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Scalable Solutions</span> Together
+              Let's Build{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Scalable Solutions
+              </span>{" "}
+              Together
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Looking for a <span className="font-bold">senior engineering leader</span> who can architect AI systems, scale teams, and deliver measurable business impact? Let's discuss how my experience building systems for 35M+ users can drive your next breakthrough.
+              Looking for a <span className="font-bold">senior engineering leader</span> who can
+              architect AI systems, scale teams, and deliver measurable business impact? Let's
+              discuss how my experience building systems for 35M+ users can drive your next
+              breakthrough.
             </p>
           </div>
 
@@ -123,7 +130,8 @@ export const ContactSection = () => {
                   </div>
                   <p className="text-muted-foreground mb-2">Toronto, Canada</p>
                   <p className="text-sm text-muted-foreground">
-                    Available for remote work globally and on-site opportunities in the Greater Toronto Area.
+                    Available for remote work globally and on-site opportunities in the Greater
+                    Toronto Area.
                   </p>
                 </div>
               </div>
@@ -155,7 +163,8 @@ export const ContactSection = () => {
                       <h4 className="text-xl font-semibold">Book a Call</h4>
                     </div>
                     <p className="text-muted-foreground mb-4">
-                      Prefer to discuss over a call? Let's schedule a time that works for both of us.
+                      Prefer to discuss over a call? Let's schedule a time that works for both of
+                      us.
                     </p>
                     <a
                       href="https://cal.com/shayanys/30min"
@@ -171,7 +180,8 @@ export const ContactSection = () => {
                   <div className="text-center p-6 bg-muted/50 rounded-xl">
                     <h4 className="font-semibold mb-2">Open to Opportunities</h4>
                     <p className="text-sm text-muted-foreground">
-                      Senior/Lead Software Engineer • AI/ML Architecture • Engineering Management • Technical Advisory
+                      Senior/Lead Software Engineer • AI/ML Architecture • Engineering Management •
+                      Technical Advisory
                     </p>
                   </div>
                 </div>

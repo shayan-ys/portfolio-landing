@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
 }
 
 @layer utilities {
@@ -101,7 +109,7 @@ body {
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  
+
   .hero-animate.show {
     opacity: 1;
     transform: translateY(0);
@@ -113,7 +121,7 @@ body {
     transform: translateY(40px) scale(0.9);
     transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  
+
   .hero-profile.show {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -125,31 +133,47 @@ body {
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
-  
+
   .hero-social.show {
     opacity: 1;
     transform: translateY(0);
   }
 
   /* Staggered delays */
-  .delay-100 { transition-delay: 100ms; }
-  .delay-200 { transition-delay: 200ms; }
-  .delay-300 { transition-delay: 300ms; }
-  .delay-400 { transition-delay: 400ms; }
-  .delay-500 { transition-delay: 500ms; }
-  .delay-600 { transition-delay: 600ms; }
-  .delay-700 { transition-delay: 700ms; }
-  .delay-800 { transition-delay: 800ms; }
+  .delay-100 {
+    transition-delay: 100ms;
+  }
+  .delay-200 {
+    transition-delay: 200ms;
+  }
+  .delay-300 {
+    transition-delay: 300ms;
+  }
+  .delay-400 {
+    transition-delay: 400ms;
+  }
+  .delay-500 {
+    transition-delay: 500ms;
+  }
+  .delay-600 {
+    transition-delay: 600ms;
+  }
+  .delay-700 {
+    transition-delay: 700ms;
+  }
+  .delay-800 {
+    transition-delay: 800ms;
+  }
 
   /* Button hover animations */
   .hero-button {
     transition: transform 0.2s ease-out;
   }
-  
+
   .hero-button:hover {
     transform: translateY(-2px);
   }
-  
+
   .hero-button:active {
     transform: translateY(0) scale(0.98);
   }
@@ -160,7 +184,9 @@ body {
   }
 
   @keyframes bounce-smooth {
-    0%, 80%, 100% {
+    0%,
+    80%,
+    100% {
       transform: translateY(0);
     }
     40% {
@@ -177,11 +203,11 @@ body {
       transform: none;
       transition: none;
     }
-    
+
     .hero-button:hover {
       transform: none;
     }
-    
+
     .hero-bounce {
       animation: none;
     }
@@ -201,19 +227,19 @@ body {
       transition: none;
       animation: none;
     }
-    
+
     .shooting-star-h,
     .shooting-star-v {
       opacity: 0;
     }
-    
+
     .hero-button:hover {
       transform: none;
     }
   }
 
   /* Shooting Stars Animation System */
-  
+
   /* Base shooting star styles */
   .shooting-star-h,
   .shooting-star-v {
@@ -221,7 +247,9 @@ body {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    box-shadow: 0 0 8px currentColor, 0 0 16px currentColor;
+    box-shadow:
+      0 0 8px currentColor,
+      0 0 16px currentColor;
     opacity: 0;
     pointer-events: none;
     will-change: transform, opacity;
@@ -233,7 +261,7 @@ body {
   }
 
   .shooting-star-h::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -1px;
     left: -80px;
@@ -249,7 +277,7 @@ body {
   }
 
   .shooting-star-v::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -80px;
     left: -1px;
@@ -367,15 +395,17 @@ body {
       animation-duration: 6s; /* Faster on mobile */
       width: 3px;
       height: 3px;
-      box-shadow: 0 0 6px currentColor, 0 0 12px currentColor;
+      box-shadow:
+        0 0 6px currentColor,
+        0 0 12px currentColor;
     }
-    
+
     .shooting-star-h::before {
       width: 60px;
       height: 2px;
       left: -60px;
     }
-    
+
     .shooting-star-v::before {
       width: 2px;
       height: 60px;

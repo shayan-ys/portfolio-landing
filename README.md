@@ -31,7 +31,7 @@ cd portfolio-landing
 pnpm install
 # or
 npm install
-# or  
+# or
 yarn install
 
 # Run the development server
@@ -47,23 +47,27 @@ Open [http://localhost:3000](http://localhost:3000) to view the website.
 ## 🛠️ Tech Stack
 
 ### Core
+
 - **Next.js 15** - React framework with App Router
 - **React 19** - Latest React with concurrent features
 - **TypeScript** - Type-safe development
 - **Tailwind CSS** - Utility-first CSS framework
 
 ### UI Components
+
 - **Shadcn/ui** - High-quality component library
 - **Radix UI** - Unstyled, accessible components
 - **Lucide React** - Beautiful icons
 - **next-themes** - Dark/light mode support
 
 ### Performance & Analytics
+
 - **@vercel/speed-insights** - Real-time performance monitoring
 - **SWC** - Fast TypeScript/JavaScript compiler
 - **Image Optimization** - Next.js Image component with AVIF/WebP
 
 ### Development
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **TypeScript** - Static type checking
@@ -93,17 +97,20 @@ portfolio-landing/
 ## 🎨 Design System
 
 ### Colors
+
 - **Primary**: Blue to Purple gradient
 - **Background**: Light/Dark mode adaptive
 - **Text**: Semantic color tokens
 - **Interactive**: Focus states and hover effects
 
 ### Typography
+
 - **Font**: System font stack for optimal performance
 - **Scale**: Responsive typography with proper hierarchy
 - **Spacing**: Consistent spacing scale
 
 ### Components
+
 - **Cards**: Elevation and hover effects
 - **Buttons**: Multiple variants with proper states
 - **Navigation**: Smooth scrolling and mobile-friendly
@@ -112,6 +119,7 @@ portfolio-landing/
 ## 🔧 Configuration
 
 ### Environment Variables
+
 Create a `.env.local` file:
 
 ```env
@@ -187,3 +195,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ---
 
 Built with ❤️ by Shayan Yousefian
+
+# Pre-commit Test

@@ -16,7 +16,7 @@ export const EducationSection = () => {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -45,8 +45,8 @@ export const EducationSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Combining advanced academic research with practical industry experience to drive innovation in artificial
-              intelligence and software engineering.
+              Combining advanced academic research with practical industry experience to drive
+              innovation in artificial intelligence and software engineering.
             </p>
           </div>
 
@@ -61,7 +61,9 @@ export const EducationSection = () => {
                     <CardTitle className="text-2xl md:group-hover:text-blue-600 md:transition-colors">
                       Master of Science in Computer Science
                     </CardTitle>
-                    <p className="text-lg text-muted-foreground">Brock University, St. Catharines, ON</p>
+                    <p className="text-lg text-muted-foreground">
+                      Brock University, St. Catharines, ON
+                    </p>
                     <p className="text-sm text-muted-foreground">Fall 2017 – Winter 2019</p>
                   </div>
                 </div>
@@ -78,9 +80,9 @@ export const EducationSection = () => {
                         Thesis: AI-Generated Quests for RPG Games Using Genetic Programming
                       </h4>
                       <p className="text-sm text-muted-foreground">
-                        Pioneered the application of genetic programming algorithms to automatically generate engaging
-                        and balanced quests for role-playing games, combining artificial intelligence with game design
-                        principles.
+                        Pioneered the application of genetic programming algorithms to automatically
+                        generate engaging and balanced quests for role-playing games, combining
+                        artificial intelligence with game design principles.
                       </p>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -102,7 +104,8 @@ export const EducationSection = () => {
                         <div>
                           <p className="text-sm font-medium">Advanced AI Research</p>
                           <p className="text-xs text-muted-foreground">
-                            Explored cutting-edge applications of genetic algorithms in creative domains
+                            Explored cutting-edge applications of genetic algorithms in creative
+                            domains
                           </p>
                         </div>
                       </div>
