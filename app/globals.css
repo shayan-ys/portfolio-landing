@@ -292,6 +292,39 @@ body {
     color: rgb(103 232 249 / 0.6); /* cyan-300 with opacity */
   }
 
+  /* Dark mode adjustments for shooting stars */
+  .dark .shooting-star-blue {
+    color: rgb(147 197 253 / 0.15); /* Further reduced opacity for dark mode */
+  }
+
+  .dark .shooting-star-purple {
+    color: rgb(196 181 253 / 0.15);
+  }
+
+  .dark .shooting-star-teal {
+    color: rgb(134 239 172 / 0.15);
+  }
+
+  .dark .shooting-star-indigo {
+    color: rgb(165 180 252 / 0.15);
+  }
+
+  .dark .shooting-star-emerald {
+    color: rgb(110 231 183 / 0.15);
+  }
+
+  .dark .shooting-star-rose {
+    color: rgb(253 164 175 / 0.15);
+  }
+
+  .dark .shooting-star-amber {
+    color: rgb(252 211 77 / 0.15);
+  }
+
+  .dark .shooting-star-cyan {
+    color: rgb(103 232 249 / 0.15);
+  }
+
   /* Keyframe animations */
   @keyframes shootHorizontal {
     0% {
