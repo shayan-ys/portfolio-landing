@@ -121,7 +121,7 @@ export const ExperienceSection = () => {
               Professional Journey
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              A Decade of{" "}
+              <span>A Decade of </span>
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Innovation
               </span>
