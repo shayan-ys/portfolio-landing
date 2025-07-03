@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail, MapPin } from "lucide-react"
+import { ArrowDown, Github, Linkedin, Mail, MapPin, Download } from "lucide-react"
 
 export const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -23,6 +23,13 @@ export const HeroSection = () => {
 
   const handleScrollToContact = () => {
     document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const handleDownloadResume = () => {
+    const link = document.createElement('a')
+    link.href = '/resume.pdf'
+    link.download = 'Shayan_Yousefian_Resume.pdf'
+    link.click()
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
@@ -116,7 +123,7 @@ export const HeroSection = () => {
               <MapPin className="h-4 w-4" aria-hidden="true" />
               <span>Toronto, Canada</span>
             </div>
-            <div className="flex items-center gap-4" role="list" aria-label="Social links">
+            <div className="flex items-center gap-4" role="group" aria-label="Social links">
               <Button 
                 variant="outline" 
                 size="icon" 
@@ -128,7 +135,6 @@ export const HeroSection = () => {
                 <a 
                   href="mailto:info@shayanys.com" 
                   aria-label="Send email to Shayan Yousefian"
-                  role="listitem"
                 >
                   <Mail className="h-4 w-4" />
                 </a>
@@ -146,7 +152,6 @@ export const HeroSection = () => {
                   aria-label="Visit Shayan Yousefian's LinkedIn profile"
                   target="_blank"
                   rel="noopener noreferrer"
-                  role="listitem"
                 >
                   <Linkedin className="h-4 w-4" />
                 </a>
@@ -164,7 +169,6 @@ export const HeroSection = () => {
                   aria-label="Visit Shayan Yousefian's GitHub profile" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  role="listitem"
                 >
                   <Github className="h-4 w-4" />
                 </a>
@@ -178,12 +182,23 @@ export const HeroSection = () => {
               isLoaded ? "show" : ""
             }`}
           >
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={handleDownloadResume}
+              onKeyDown={(e) => handleKeyDown(e, handleDownloadResume)}
+              className="hero-button"
+            >
+              <span className="flex items-center">
+                <Download className="mr-2 h-4 w-4" aria-hidden="true" />
+                Download Resume
+              </span>
+            </Button>
             <Button
               size="lg"
               onClick={handleScrollToAbout}
               onKeyDown={(e) => handleKeyDown(e, handleScrollToAbout)}
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white hero-button"
-              aria-label="Scroll to about section"
             >
               Explore My Work
               <ArrowDown className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -194,7 +209,6 @@ export const HeroSection = () => {
               onClick={handleScrollToContact}
               onKeyDown={(e) => handleKeyDown(e, handleScrollToContact)}
               className="hero-button"
-              aria-label="Scroll to contact section"
             >
               Get In Touch
             </Button>
