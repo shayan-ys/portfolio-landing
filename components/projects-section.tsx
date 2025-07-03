@@ -86,7 +86,7 @@ export const ProjectsSection = () => {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -115,8 +115,8 @@ export const ProjectsSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              A showcase of high-impact projects that demonstrate technical excellence, innovation, and measurable
-              business results across various industries and technologies.
+              A showcase of high-impact projects that demonstrate technical excellence, innovation,
+              and measurable business results across various industries and technologies.
             </p>
           </div>
 
@@ -147,14 +147,19 @@ export const ProjectsSection = () => {
                   <div className="mb-4">
                     <div className="flex items-center gap-2 mb-2">
                       <TrendingUp className="h-4 w-4 text-green-500" />
-                      <span className="text-sm font-medium text-green-600 dark:text-green-400">{project.impact}</span>
+                      <span className="text-sm font-medium text-green-600 dark:text-green-400">
+                        {project.impact}
+                      </span>
                     </div>
                   </div>
 
                   <div className="mb-4">
                     <div className="grid grid-cols-1 gap-1">
                       {project.metrics.map((metric, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <div
+                          key={i}
+                          className="flex items-center gap-2 text-xs text-muted-foreground"
+                        >
                           <div className="w-1 h-1 rounded-full bg-blue-500"></div>
                           {metric}
                         </div>
@@ -187,8 +192,9 @@ export const ProjectsSection = () => {
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-4">Ready to Build Something Amazing?</h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                These projects represent just a fraction of what's possible when technical expertise meets creative
-                problem-solving. Let's discuss how we can create impactful solutions together.
+                These projects represent just a fraction of what's possible when technical expertise
+                meets creative problem-solving. Let's discuss how we can create impactful solutions
+                together.
               </p>
               <Button
                 size="lg"

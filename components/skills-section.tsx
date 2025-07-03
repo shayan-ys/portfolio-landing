@@ -103,7 +103,7 @@ export const SkillsSection = () => {
           }, 500)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -126,10 +126,17 @@ export const SkillsSection = () => {
               Technical Expertise
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Mastering the Tech Stack & <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Architecture</span>
+              Mastering the Tech Stack &{" "}
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Architecture
+              </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              <span className="font-bold">Senior-level expertise</span> in system architecture, team leadership, and AI/ML implementation. Proven ability to <span className="font-bold">design scalable systems</span>, mentor engineering teams, and drive technical decisions that impact millions of users and save hundreds of thousands in operational costs.
+              <span className="font-bold">Senior-level expertise</span> in system architecture, team
+              leadership, and AI/ML implementation. Proven ability to{" "}
+              <span className="font-bold">design scalable systems</span>, mentor engineering teams,
+              and drive technical decisions that impact millions of users and save hundreds of
+              thousands in operational costs.
             </p>
           </div>
 
@@ -157,9 +164,9 @@ export const SkillsSection = () => {
                           <span className="text-sm font-medium">{skill.name}</span>
                           <span className="text-xs text-muted-foreground">{skill.level}%</span>
                         </div>
-                        <Progress 
-                          value={animatedSkills[skill.name] || 0} 
-                          className="h-2" 
+                        <Progress
+                          value={animatedSkills[skill.name] || 0}
+                          className="h-2"
                           aria-label={`${skill.name} proficiency level: ${skill.level}%`}
                         />
                       </div>

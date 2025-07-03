@@ -12,12 +12,7 @@ export default function Portfolio() {
     <>
       <div className="min-h-screen bg-background">
         <Navigation />
-        <main 
-          id="main-content" 
-          role="main" 
-          aria-label="Main content"
-          tabIndex={-1}
-        >
+        <main id="main-content" role="main" aria-label="Main content" tabIndex={-1}>
           {/* Hidden heading for document structure */}
           <h1 className="sr-only">Shayan Yousefian - Portfolio</h1>
           <HeroSection />

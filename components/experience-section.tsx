@@ -33,7 +33,14 @@ const experiences = [
       "Enhanced productivity by deploying six React data-visualization applications, cutting annual IT costs by $400K",
       "Cultivated team growth through mentoring, resulting in promotions and higher team satisfaction",
     ],
-    technologies: ["React", "Flask", "GKE", "Microservices", "Data Visualization", "Team Leadership"],
+    technologies: [
+      "React",
+      "Flask",
+      "GKE",
+      "Microservices",
+      "Data Visualization",
+      "Team Leadership",
+    ],
   },
   {
     title: "Software Engineer",
@@ -59,7 +66,14 @@ const experiences = [
       "Improved blog website's page load speed by 45% through specialized WordPress plugins and optimization techniques",
       "Responsible for system requirements gathering, design, and development of 2 full-stack web applications",
     ],
-    technologies: ["Python", "Django", "WordPress", "Big Data Analytics", "Load Balancing", "Performance Optimization"],
+    technologies: [
+      "Python",
+      "Django",
+      "WordPress",
+      "Big Data Analytics",
+      "Load Balancing",
+      "Performance Optimization",
+    ],
   },
   {
     title: "Software Engineer",
@@ -98,7 +112,7 @@ export const ExperienceSection = () => {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -127,8 +141,8 @@ export const ExperienceSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              From junior developer to senior engineer and team leader, my career has been defined by continuous
-              learning, technical excellence, and delivering impactful solutions.
+              From junior developer to senior engineer and team leader, my career has been defined
+              by continuous learning, technical excellence, and delivering impactful solutions.
             </p>
           </div>
 
@@ -149,7 +163,10 @@ export const ExperienceSection = () => {
                     <Card className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-1">
                       <CardHeader>
                         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-                          <Badge variant={exp.type === "Current Role" ? "default" : "secondary"} className="w-fit">
+                          <Badge
+                            variant={exp.type === "Current Role" ? "default" : "secondary"}
+                            className="w-fit"
+                          >
                             {exp.type}
                           </Badge>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -173,7 +190,10 @@ export const ExperienceSection = () => {
                       <CardContent>
                         <ul className="space-y-2 mb-4">
                           {exp.achievements.map((achievement, i) => (
-                            <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                            <li
+                              key={i}
+                              className="flex items-start gap-2 text-sm text-muted-foreground"
+                            >
                               <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
                               {achievement}
                             </li>

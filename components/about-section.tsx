@@ -10,12 +10,14 @@ const highlights = [
   {
     icon: Brain,
     title: "AI/ML Systems Development",
-    description: "Built enterprise RAG systems and LLM integration platforms using LangChain and FastAPI",
+    description:
+      "Built enterprise RAG systems and LLM integration platforms using LangChain and FastAPI",
   },
   {
     icon: Users,
     title: "Engineering Team Leadership",
-    description: "Led remote engineering teams and mentored developers, resulting in promotions and growth",
+    description:
+      "Led remote engineering teams and mentored developers, resulting in promotions and growth",
   },
   {
     icon: Rocket,
@@ -25,7 +27,8 @@ const highlights = [
   {
     icon: Award,
     title: "Full-Stack Excellence",
-    description: "Architected scalable web solutions serving 35M+ monthly users with high availability",
+    description:
+      "Architected scalable web solutions serving 35M+ monthly users with high availability",
   },
 ]
 
@@ -40,7 +43,7 @@ export const AboutSection = () => {
           setIsVisible(true)
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     if (sectionRef.current) {
@@ -69,7 +72,15 @@ export const AboutSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              <span className="font-bold">10+ years of software engineering experience</span> specializing in <span className="text-blue-600 font-bold">AI/ML systems and high-scale web applications</span>. I've <span className="font-bold">built systems serving 35M+ monthly users</span>, led engineering teams through critical product launches, and <span className="font-bold">reduced infrastructure costs by $400K+ annually</span> through strategic technical decisions.
+              <span className="font-bold">10+ years of software engineering experience</span>{" "}
+              specializing in{" "}
+              <span className="text-blue-600 font-bold">
+                AI/ML systems and high-scale web applications
+              </span>
+              . I've <span className="font-bold">built systems serving 35M+ monthly users</span>,
+              led engineering teams through critical product launches, and{" "}
+              <span className="font-bold">reduced infrastructure costs by $400K+ annually</span>{" "}
+              through strategic technical decisions.
             </p>
           </div>
 
@@ -95,13 +106,15 @@ export const AboutSection = () => {
               <div>
                 <h3 className="text-2xl font-bold mb-4">My Philosophy</h3>
                 <p className="text-muted-foreground mb-4">
-                  I believe in the power of technology to solve real-world problems. Every line of code I write is
-                  driven by the desire to create meaningful impact, whether it's optimizing performance, enhancing user
-                  experience, or pioneering new AI capabilities.
+                  I believe in the power of technology to solve real-world problems. Every line of
+                  code I write is driven by the desire to create meaningful impact, whether it's
+                  optimizing performance, enhancing user experience, or pioneering new AI
+                  capabilities.
                 </p>
                 <p className="text-muted-foreground">
-                  My approach combines technical excellence with strategic thinking, ensuring that solutions are not
-                  just functional, but scalable, maintainable, and aligned with business objectives.
+                  My approach combines technical excellence with strategic thinking, ensuring that
+                  solutions are not just functional, but scalable, maintainable, and aligned with
+                  business objectives.
                 </p>
               </div>
               <div className="flex flex-col items-center">

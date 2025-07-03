@@ -2,11 +2,34 @@
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "lint:fix": "next lint --fix",
+    "start": "next start",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo 'Add your test command here'",
+    "test:ci": "echo 'Add your CI test command here'",
+    "prepare": "husky",
+    "pre-commit": "lint-staged",
+    "commit-msg": "commitlint --edit $1",
+    "a11y:lint": "eslint . --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "a11y:lighthouse": "lhci autorun",
+    "a11y:lighthouse-ci": "lhci autorun --config=lighthouserc.json",
+    "a11y:test": "npm run a11y:lint && npm run build && npm run a11y:lighthouse-ci",
+    "a11y:dev": "echo '🔍 Running accessibility checks in development mode...' && npm run a11y:lint"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{json,md,css,scss}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -61,12 +84,26 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.10.2",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.30.1",
+    "@lhci/cli": "^0.15.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
     "beasties": "^0.3.4",
+    "eslint": "^9.30.1",
+    "eslint-config-next": "^15.3.4",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "node-html-parser": "^7.0.1",
     "postcss": "^8.5",
+    "prettier": "^3.6.2",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
   }

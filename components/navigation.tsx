@@ -30,9 +30,9 @@ export const Navigation = () => {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false)
     if (href === "resume") {
-      const link = document.createElement('a')
-      link.href = '/resume.pdf'
-      link.download = 'Shayan_Yousefian_Resume.pdf'
+      const link = document.createElement("a")
+      link.href = "/resume.pdf"
+      link.download = "Shayan_Yousefian_Resume.pdf"
       link.click()
     } else {
       const element = document.querySelector(href)
@@ -83,7 +83,7 @@ export const Navigation = () => {
       >
         Skip to main content
       </a>
-      
+
       <nav
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           isScrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"
@@ -93,11 +93,8 @@ export const Navigation = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div 
-              className="flex items-center gap-3"
-              role="banner"
-            >
-              <button 
+            <div className="flex items-center gap-3" role="banner">
+              <button
                 className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1 transition-colors duration-200 hover:opacity-80"
                 onClick={handleBannerClick}
                 onKeyDown={handleBannerKeyDown}
@@ -131,18 +128,20 @@ export const Navigation = () => {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
               <ul className="flex items-center space-x-8" role="list">
-                {navItems.filter(item => item.href !== "resume").map((item) => (
-                  <li key={item.href} role="listitem">
-                    <button
-                      onClick={() => handleNavClick(item.href)}
-                      onKeyDown={(e) => handleKeyDown(e, item.href)}
-                      className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1"
-                      aria-label={`Navigate to ${item.label} section`}
-                    >
-                      {item.label}
-                    </button>
-                  </li>
-                ))}
+                {navItems
+                  .filter((item) => item.href !== "resume")
+                  .map((item) => (
+                    <li key={item.href} role="listitem">
+                      <button
+                        onClick={() => handleNavClick(item.href)}
+                        onKeyDown={(e) => handleKeyDown(e, item.href)}
+                        className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                        aria-label={`Navigate to ${item.label} section`}
+                      >
+                        {item.label}
+                      </button>
+                    </li>
+                  ))}
               </ul>
               <ThemeToggle />
             </div>
@@ -150,9 +149,9 @@ export const Navigation = () => {
             {/* Mobile Navigation */}
             <div className="lg:hidden flex items-center space-x-2">
               <ThemeToggle />
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={toggleMobileMenu}
                 aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
                 aria-expanded={isMobileMenuOpen}
@@ -165,7 +164,7 @@ export const Navigation = () => {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div 
+            <div
               id="mobile-menu"
               className="lg:hidden bg-background border-t"
               role="menu"
