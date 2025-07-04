@@ -1,10 +1,16 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { X, ExternalLink, Calendar, Users, TrendingUp } from "lucide-react"
+import { Calendar, Users, TrendingUp } from "lucide-react"
 import Image from "next/image"
 
 export interface ProjectData {
@@ -51,36 +57,25 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 gap-0 [&>button]:h-12 [&>button]:w-12 [&>button]:p-3 [&>button]:text-white [&>button]:bg-black/20 [&>button]:hover:bg-black/30 [&>button]:border-0 [&>button]:rounded-lg [&>button]:backdrop-blur-sm [&>button]:transition-colors [&>button>svg]:h-6 [&>button>svg]:w-6">
         <div className="relative">
           {/* Header with gradient background */}
           <div className={`bg-gradient-to-br ${project.color} p-6 text-white`}>
             <DialogHeader className="space-y-3">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
-                    <project.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <div>
-                    <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
-                      {project.title}
-                    </DialogTitle>
-                    <DialogDescription className="text-white/90 text-lg font-medium">
-                      {project.company}
-                    </DialogDescription>
-                  </div>
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                  <project.icon className="h-8 w-8 text-white" />
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onClose}
-                  className="text-white hover:bg-white/20 h-10 w-10"
-                  aria-label="Close modal"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
+                <div>
+                  <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
+                    {project.title}
+                  </DialogTitle>
+                  <DialogDescription className="text-white/90 text-lg font-medium">
+                    {project.company}
+                  </DialogDescription>
+                </div>
               </div>
-              
+
               <div className="flex flex-wrap gap-3 pt-2">
                 <div className="flex items-center gap-2 text-white/90">
                   <Calendar className="h-4 w-4" />
@@ -105,13 +100,15 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
             {project.images.length > 0 && (
               <div className="space-y-4">
                 <h3 className="text-xl font-semibold">Project Screenshots</h3>
-                <div className={`grid gap-4 ${project.images.length > 1 ? 'md:grid-cols-2' : ''}`}>
+                <div className={`grid gap-4 ${project.images.length > 1 ? "md:grid-cols-2" : ""}`}>
                   {project.images.map((image, index) => (
                     <div
                       key={index}
                       className="relative rounded-lg overflow-hidden border bg-muted/50"
                     >
-                      <div className={`relative aspect-video transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}>
+                      <div
+                        className={`relative aspect-video transition-opacity duration-500 ${isImageLoaded ? "opacity-100" : "opacity-0"}`}
+                      >
                         <Image
                           src={image}
                           alt={`${project.title} screenshot ${index + 1}`}
@@ -134,9 +131,7 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
             {/* Description */}
             <div className="space-y-4">
               <h3 className="text-xl font-semibold">Project Overview</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {project.longDescription}
-              </p>
+              <p className="text-muted-foreground leading-relaxed">{project.longDescription}</p>
             </div>
 
             {/* Impact & Metrics */}
@@ -183,7 +178,10 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
                 <h3 className="text-xl font-semibold">Technical Challenges & Solutions</h3>
                 <div className="space-y-3">
                   {project.challenges.map((challenge, index) => (
-                    <div key={index} className="p-4 border-l-4 border-orange-500 bg-orange-50 dark:bg-orange-950/20">
+                    <div
+                      key={index}
+                      className="p-4 border-l-4 border-orange-500 bg-orange-50 dark:bg-orange-950/20"
+                    >
                       <p className="text-sm">{challenge}</p>
                     </div>
                   ))}
@@ -197,7 +195,10 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
                 <h3 className="text-xl font-semibold">Project Outcomes</h3>
                 <div className="space-y-3">
                   {project.outcomes.map((outcome, index) => (
-                    <div key={index} className="p-4 border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20">
+                    <div
+                      key={index}
+                      className="p-4 border-l-4 border-green-500 bg-green-50 dark:bg-green-950/20"
+                    >
                       <p className="text-sm">{outcome}</p>
                     </div>
                   ))}
@@ -216,20 +217,6 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
                 ))}
               </div>
             </div>
-
-            {/* Demo Link */}
-            {project.demoUrl && (
-              <div className="pt-6 border-t">
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto"
-                  onClick={() => window.open(project.demoUrl, '_blank')}
-                >
-                  View Live Project
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            )}
           </div>
         </div>
       </DialogContent>

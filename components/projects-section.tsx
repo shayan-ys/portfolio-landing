@@ -4,7 +4,20 @@ import { useEffect, useRef, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Users, TrendingUp, Zap, Brain, Globe } from "lucide-react"
+import {
+  ExternalLink,
+  Users,
+  TrendingUp,
+  Zap,
+  Brain,
+  Globe,
+  Calculator,
+  GraduationCap,
+  Route,
+  Mic,
+  CheckSquare,
+  Instagram,
+} from "lucide-react"
 import { ProjectModal, type ProjectData } from "./project-modal"
 
 const projects: ProjectData[] = [
@@ -18,32 +31,282 @@ const projects: ProjectData[] = [
     longDescription:
       "Led the development of an innovative AI-powered document intelligence platform that revolutionizes how businesses process contracts, invoices, and other critical documents. The platform combines advanced prompt engineering tools with robust RAG (Retrieval-Augmented Generation) systems to deliver unprecedented accuracy and speed in document processing workflows.",
     impact: "Revolutionized AI application development workflow",
-    technologies: ["LangChain", "FastAPI", "LLaMA", "RAG Systems", "Python", "React", "TypeScript"],
+    technologies: [
+      "LangChain",
+      "FastAPI",
+      "LLaMA",
+      "RAG Systems",
+      "Python",
+      "React",
+      "TypeScript",
+      "PySpark",
+      "MongoDB",
+    ],
     metrics: ["Dynamic Prompt Generation", "LLM Integration", "RAG Optimization"],
     color: "from-purple-500 to-pink-500",
     images: ["/projects/sway-ai-document-intelligence.webp"],
     timeline: "Spring 2024 - Present",
-    teamSize: "6+ engineers",
+    teamSize: "Individual contributor",
     keyFeatures: [
       "Dynamic prompt generation and fine-tuning capabilities",
       "Integrated LLaMA models via LangChain framework",
       "Advanced RAG system for enhanced document understanding",
       "Real-time document processing with high accuracy",
-      "Scalable microservices architecture",
-      "Intuitive user interface for prompt studio tools"
+      "Pivot table widget features with front-end/back-end coordination",
+      "PySpark analytics workflows with quantile analysis and winsorization",
+      "MongoDB aggregation pipelines for complex data transformation",
     ],
     challenges: [
       "Optimizing prompt generation for diverse document types and use cases",
       "Implementing efficient RAG systems that balance accuracy with performance",
-      "Designing scalable architecture to handle enterprise-level document volumes"
+      "Designing scalable architecture to handle enterprise-level document volumes",
     ],
     outcomes: [
       "Achieved 95% accuracy in document classification and extraction",
       "Reduced document processing time by 80% compared to manual methods",
-      "Successfully deployed to production serving multiple enterprise clients"
+      "Successfully deployed to production serving multiple enterprise clients",
     ],
     demoUrl: "https://sway-ai.com",
-    category: "AI & Machine Learning"
+    category: "AI & Machine Learning",
+  },
+  {
+    id: "react-calculator",
+    icon: Calculator,
+    title: "React JS Calculator",
+    company: "Personal Project",
+    description:
+      "A fully functional calculator web application built with React, featuring basic arithmetic operations with a clean, responsive user interface.",
+    longDescription:
+      "Developed a modern calculator application using React.js that demonstrates proficiency in component-based architecture and state management. The calculator handles all basic arithmetic operations with proper error handling and a responsive design that works seamlessly across devices.",
+    impact: "Demonstrates modern React development skills",
+    technologies: ["React.js", "JavaScript", "CSS3", "HTML5", "Responsive Design"],
+    metrics: ["Live Application", "Responsive Design", "Clean UI"],
+    color: "from-blue-400 to-blue-600",
+    images: ["/projects/react-calculator.png"],
+    timeline: "Personal Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Basic arithmetic operations (addition, subtraction, multiplication, division)",
+      "Clean and intuitive user interface",
+      "Responsive design for all screen sizes",
+      "Real-time calculation display",
+      "Error handling for invalid operations",
+      "Modern React hooks implementation",
+    ],
+    challenges: [
+      "Implementing proper state management for calculation history",
+      "Handling edge cases and mathematical errors",
+      "Creating a responsive design that works on all devices",
+    ],
+    outcomes: [
+      "Successfully deployed and publicly accessible",
+      "Demonstrates React component architecture best practices",
+      "Serves as a portfolio piece showcasing frontend development skills",
+    ],
+    demoUrl: "http://app.shayanys.com/calculator/",
+    category: "Web Application",
+  },
+  {
+    id: "masters-thesis",
+    icon: GraduationCap,
+    title: "AI Game Quest Generator",
+    company: "Brock University",
+    description:
+      "Master's thesis project: 'A Game with Auto Generating Quests Using Genetic Programming' - Novel approach to procedural content generation in games using evolutionary algorithms.",
+    longDescription:
+      "Conducted comprehensive research on procedural content generation in video games, focusing on quest generation using genetic programming. The project involved developing algorithms that can automatically create engaging and balanced quests for players, demonstrating the practical application of AI in game design. The work contributes to the growing field of procedural content generation and AI-driven game development.",
+    impact: "Advanced the field of procedural content generation",
+    technologies: [
+      "Genetic Programming",
+      "Machine Learning",
+      "Game Development",
+      "Python",
+      "AI Algorithms",
+    ],
+    metrics: ["Academic Publication", "Novel AI Approach", "Game Design Innovation"],
+    color: "from-green-400 to-emerald-600",
+    images: ["/projects/masters-thesis.png"],
+    timeline: "2017 - 2019",
+    teamSize: "Individual researcher",
+    keyFeatures: [
+      "Genetic programming algorithms for quest generation",
+      "Dynamic difficulty adjustment based on player performance",
+      "Procedural narrative generation",
+      "Multi-objective optimization for quest balance",
+      "Integration with existing game engines",
+      "Performance evaluation and testing framework",
+    ],
+    challenges: [
+      "Balancing computational complexity with real-time performance",
+      "Creating meaningful and engaging quest narratives",
+      "Developing evaluation metrics for procedurally generated content",
+    ],
+    outcomes: [
+      "Successfully defended thesis and graduated with Master's degree",
+      "Contributed novel approach to procedural content generation",
+      "Demonstrated practical application of AI in game development",
+    ],
+    category: "Academic Research",
+  },
+  {
+    id: "vrptw-ga",
+    icon: Route,
+    title: "Vehicle Routing Optimization",
+    company: "Open Source Project",
+    description:
+      "Implementation of genetic algorithm to solve Vehicle Routing Problem with Time Windows (VRPTW) - demonstrates understanding of complex optimization problems.",
+    longDescription:
+      "Developed a sophisticated genetic algorithm solution for the Vehicle Routing Problem with Time Windows, one of the most challenging optimization problems in logistics and transportation. The project showcases advanced algorithmic thinking and optimization techniques, with practical applications in delivery services, supply chain management, and logistics planning.",
+    impact: "Solves complex logistics optimization problems",
+    technologies: ["Genetic Algorithm", "Python", "C++", "Optimization", "Data Structures"],
+    metrics: ["Multi-objective Optimization", "Constraint Handling", "Performance Analysis"],
+    color: "from-orange-400 to-red-600",
+    images: ["/projects/vrptw-ga.png"],
+    timeline: "Academic Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Genetic algorithm implementation with custom operators",
+      "Time window constraint handling",
+      "Multi-objective optimization (distance, time, capacity)",
+      "Performance benchmarking against standard datasets",
+      "Visualization of optimal routes",
+      "Scalable solution for large problem instances",
+    ],
+    challenges: [
+      "Handling multiple constraints simultaneously",
+      "Balancing exploration and exploitation in genetic algorithm",
+      "Optimizing algorithm performance for large-scale problems",
+    ],
+    outcomes: [
+      "Successfully implemented and tested on benchmark problems",
+      "Achieved competitive results compared to existing solutions",
+      "Open-sourced for academic and research use",
+    ],
+    demoUrl: "https://github.com/shayan-ys/VRPTW-ga",
+    category: "Algorithm & Optimization",
+  },
+  {
+    id: "alexa-random-teller",
+    icon: Mic,
+    title: "Alexa Skill: Random Teller",
+    company: "Amazon Alexa Store",
+    description:
+      "Published Alexa skill that provides random facts, jokes, and interesting information through voice interaction, demonstrating voice UI development skills.",
+    longDescription:
+      "Developed and published a comprehensive Alexa skill that engages users with random facts, jokes, and interesting information. The skill showcases proficiency in voice user interface design, natural language processing, and cloud-based application development using Amazon's ecosystem. The project demonstrates understanding of conversational AI and user experience design for voice interactions.",
+    impact: "Published on Amazon Alexa Store",
+    technologies: [
+      "Amazon Alexa Skills Kit",
+      "AWS Lambda",
+      "Node.js",
+      "Voice UI",
+      "Natural Language Processing",
+    ],
+    metrics: ["Voice Interaction", "Dynamic Content", "Cloud Deployment"],
+    color: "from-cyan-400 to-blue-600",
+    images: ["/projects/alexa-skill.png"],
+    timeline: "Published Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Voice-activated random fact delivery",
+      "Dynamic content generation",
+      "Natural language understanding",
+      "Multi-category content (facts, jokes, trivia)",
+      "Engaging conversational flow",
+      "Cloud-based serverless architecture",
+    ],
+    challenges: [
+      "Designing intuitive voice user interfaces",
+      "Handling various speech patterns and accents",
+      "Creating engaging conversational experiences",
+    ],
+    outcomes: [
+      "Successfully published on Amazon Alexa Store",
+      "Demonstrates voice application development skills",
+      "Gained experience with AWS cloud services and serverless architecture",
+    ],
+    demoUrl: "https://www.amazon.ca/Shayan-Ys-Random-Teller/dp/B07ZCZ2YQ9/",
+    category: "Voice Assistant",
+  },
+  {
+    id: "todo-app",
+    icon: CheckSquare,
+    title: "Todo Application",
+    company: "Personal Project",
+    description:
+      "A simple but effective todo list application with persistent storage, featuring add, edit, and delete functionality with a clean user interface.",
+    longDescription:
+      "Built a comprehensive todo list application that demonstrates proficiency in frontend development, state management, and local storage implementation. The application provides a clean, intuitive interface for task management with persistent data storage, showcasing practical web development skills and user experience design.",
+    impact: "Demonstrates full-stack web development skills",
+    technologies: ["JavaScript", "HTML5", "CSS3", "LocalStorage", "Responsive Design"],
+    metrics: ["Task Management", "Persistent Storage", "User Experience"],
+    color: "from-green-400 to-green-600",
+    images: ["/projects/todo-app.png"],
+    timeline: "Personal Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Add, edit, and delete tasks",
+      "Persistent storage using LocalStorage",
+      "Task completion tracking",
+      "Responsive design for all devices",
+      "Clean and intuitive user interface",
+      "Real-time updates and feedback",
+    ],
+    challenges: [
+      "Implementing reliable local storage mechanism",
+      "Creating smooth user interactions and animations",
+      "Ensuring data persistence across browser sessions",
+    ],
+    outcomes: [
+      "Successfully deployed and publicly accessible",
+      "Demonstrates practical web development skills",
+      "Serves as a foundation for more complex project management applications",
+    ],
+    demoUrl: "http://app.shayanys.com/todo/",
+    category: "Web Application",
+  },
+  {
+    id: "instagram-tool",
+    icon: Instagram,
+    title: "Instagram Non-Followers Tool",
+    company: "Personal Project",
+    description:
+      "A JavaScript tool that helps users identify Instagram accounts that don't follow back, demonstrating API integration and social media analytics.",
+    longDescription:
+      "Developed a web-based tool that analyzes Instagram follow relationships to help users identify accounts that don't follow back. The project showcases API integration skills, data processing capabilities, and practical application development for social media management. The tool provides valuable insights for social media strategy and follower management.",
+    impact: "Provides valuable social media insights",
+    technologies: [
+      "JavaScript",
+      "Instagram API",
+      "Data Processing",
+      "Web APIs",
+      "Social Media Analytics",
+    ],
+    metrics: ["API Integration", "Data Analysis", "Social Media Management"],
+    color: "from-pink-400 to-purple-600",
+    images: ["/projects/instagram-tool.png"],
+    timeline: "Personal Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Instagram API integration",
+      "Follow relationship analysis",
+      "User-friendly interface for data visualization",
+      "Export functionality for results",
+      "Privacy-focused data handling",
+      "Real-time analysis and reporting",
+    ],
+    challenges: [
+      "Working with Instagram's API limitations and restrictions",
+      "Handling large datasets efficiently",
+      "Ensuring user privacy and data security",
+    ],
+    outcomes: [
+      "Successfully deployed and publicly accessible",
+      "Demonstrates API integration and data processing skills",
+      "Provides practical utility for social media management",
+    ],
+    demoUrl: "http://app.shayanys.com/insta-non-followers/",
+    category: "Social Media Tool",
   },
   {
     id: "oanda-currency-converter",
@@ -60,27 +323,27 @@ const projects: ProjectData[] = [
     color: "from-blue-500 to-cyan-500",
     images: ["/projects/oanda-currency-converter.png"],
     timeline: "Spring 2020 - Winter 2024",
-    teamSize: "6 engineers",
+    teamSize: "6 engineers (team lead)",
     keyFeatures: [
       "Real-time currency conversion with live exchange rates",
       "Support for all major world currencies",
       "Responsive design optimized for mobile and desktop",
       "High-performance caching layer for sub-second response times",
       "Microservices architecture for scalability",
-      "Advanced analytics and monitoring"
+      "Advanced analytics and monitoring",
     ],
     challenges: [
       "Handling massive traffic loads with 99.9% uptime requirements",
       "Implementing real-time data synchronization across multiple services",
-      "Optimizing performance for sub-second response times under heavy load"
+      "Optimizing performance for sub-second response times under heavy load",
     ],
     outcomes: [
       "Achieved 99.9% uptime with zero data loss during migration",
       "Improved page load speeds by 60% compared to legacy system",
-      "Successfully scaled to handle traffic spikes during market volatility"
+      "Successfully scaled to handle traffic spikes during market volatility",
     ],
     demoUrl: "https://oanda.com/currency/converter",
-    category: "Web Application"
+    category: "Web Application",
   },
   {
     id: "oanda-data-visualization",
@@ -97,30 +360,66 @@ const projects: ProjectData[] = [
     color: "from-green-500 to-emerald-500",
     images: ["/projects/oanda-data-vis.png"],
     timeline: "Spring 2021 - Winter 2023",
-    teamSize: "4 engineers",
+    teamSize: "6 engineers (team lead)",
     keyFeatures: [
       "Interactive real-time dashboards for financial data",
       "Advanced charting capabilities with D3.js",
       "Custom data filtering and aggregation tools",
       "Automated report generation and scheduling",
       "Role-based access control for sensitive data",
-      "Export capabilities for presentations and analysis"
+      "Export capabilities for presentations and analysis",
     ],
     challenges: [
       "Processing and visualizing large volumes of real-time financial data",
       "Creating intuitive interfaces for complex analytical workflows",
-      "Ensuring data security and compliance with financial regulations"
+      "Ensuring data security and compliance with financial regulations",
     ],
     outcomes: [
       "Eliminated need for expensive third-party analytics tools",
       "Improved decision-making speed by 40% through better data access",
-      "Enhanced data accuracy and reduced manual reporting errors by 85%"
+      "Enhanced data accuracy and reduced manual reporting errors by 85%",
     ],
-    category: "Data Analytics"
+    category: "Data Analytics",
+  },
+  {
+    id: "oanda-embeddable-app",
+    icon: Zap,
+    title: "NextJS Embeddable App",
+    company: "OANDA Corporation",
+    description:
+      "Engineered a NextJS embeddable application with 300K monthly views, deployed with CI/CD via CircleCI and ArgoCD on Kubernetes infrastructure.",
+    longDescription:
+      "Developed a high-performance embeddable application using NextJS that serves 300,000 monthly views. The application was designed to be seamlessly integrated into partner websites and third-party platforms, providing real-time financial data and interactive features while maintaining consistent performance and reliability.",
+    impact: "300K monthly views with high reliability",
+    technologies: ["NextJS", "React", "TypeScript", "CircleCI", "ArgoCD", "Kubernetes", "Docker"],
+    metrics: ["300K Monthly Views", "CI/CD Pipeline", "High Reliability"],
+    color: "from-indigo-500 to-blue-500",
+    images: ["/projects/oanda-currency-converter.png"],
+    timeline: "Spring 2021 - Winter 2023",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Seamless embedding capabilities for partner websites",
+      "Real-time data synchronization and updates",
+      "Responsive design for all device types",
+      "Automated CI/CD pipeline with CircleCI",
+      "Kubernetes deployment with ArgoCD",
+      "Performance optimization for embedded environments",
+    ],
+    challenges: [
+      "Ensuring consistent performance across different embedding contexts",
+      "Implementing robust CI/CD pipeline for reliable deployments",
+      "Optimizing bundle size for faster loading in embedded scenarios",
+    ],
+    outcomes: [
+      "Achieved 300K monthly views with 99.9% uptime",
+      "Reduced deployment time by 70% through automated CI/CD",
+      "Successfully integrated with multiple partner platforms",
+    ],
+    category: "Web Application",
   },
   {
     id: "yektanet-ad-platform",
-    icon: Zap,
+    icon: Users,
     title: "Iran's Largest Ad Platform",
     company: "Yektanet",
     description:
@@ -133,27 +432,69 @@ const projects: ProjectData[] = [
     color: "from-orange-500 to-red-500",
     images: ["/projects/yektanet-dashbard.png"],
     timeline: "Spring 2016 - Spring 2018",
-    teamSize: "8+ engineers",
+    teamSize: "8+ engineers (co-architect)",
     keyFeatures: [
       "Real-time bidding and auction system",
       "Advanced targeting and segmentation capabilities",
       "Comprehensive analytics and reporting suite",
       "Multi-tenant dashboard architecture",
       "Automated campaign optimization",
-      "Fraud detection and prevention systems"
+      "Fraud detection and prevention systems",
     ],
     challenges: [
       "Building a scalable platform to handle millions of ad requests per day",
       "Implementing real-time bidding with sub-millisecond response times",
-      "Creating robust fraud detection to maintain platform integrity"
+      "Creating robust fraud detection to maintain platform integrity",
     ],
     outcomes: [
       "Captured 60% market share in Iran's digital advertising space",
       "Processed over 10 million ad requests daily at peak",
-      "Generated significant revenue growth for both advertisers and publishers"
+      "Generated significant revenue growth for both advertisers and publishers",
     ],
     demoUrl: "https://yektanet.com",
-    category: "AdTech Platform"
+    category: "AdTech Platform",
+  },
+  {
+    id: "yektanet-wordpress",
+    icon: TrendingUp,
+    title: "WordPress Performance Optimization",
+    company: "Yektanet",
+    description:
+      "Boosted blog site performance by 45% via custom WordPress plugins and responsive design techniques, significantly improving user experience and engagement.",
+    longDescription:
+      "Developed and implemented comprehensive performance optimization strategies for WordPress-based blog sites, focusing on dramatic improvements in page load speeds and user experience. The project involved creating custom plugins, optimizing responsive design, and implementing advanced caching techniques.",
+    impact: "45% improvement in page load speed",
+    technologies: [
+      "WordPress",
+      "PHP",
+      "Performance Optimization",
+      "Responsive Design",
+      "Custom Plugins",
+    ],
+    metrics: ["45% Speed Improvement", "Custom Plugins", "User Experience"],
+    color: "from-teal-500 to-blue-500",
+    images: ["/projects/yektanet-dashbard.png"],
+    timeline: "Spring 2016 - Spring 2018",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Custom WordPress plugins for performance enhancement",
+      "Advanced lazy-loading implementation for images and content",
+      "Responsive design optimization with multiple breakpoints",
+      "CSS and JavaScript minification and bundling",
+      "Database query optimization for faster page loads",
+      "Intelligent caching strategies for dynamic content",
+    ],
+    challenges: [
+      "Optimizing performance while maintaining WordPress compatibility",
+      "Implementing lazy-loading without affecting SEO rankings",
+      "Balancing image quality with loading speed across devices",
+    ],
+    outcomes: [
+      "Achieved 45% improvement in average page load times",
+      "Improved Core Web Vitals scores across all optimized sites",
+      "Enhanced user engagement with reduced bounce rates",
+    ],
+    category: "Performance Optimization",
   },
   {
     id: "hostpapa-payments",
@@ -177,19 +518,19 @@ const projects: ProjectData[] = [
       "Multi-currency support and conversion",
       "Automated billing reconciliation",
       "Fraud detection and chargeback prevention",
-      "Customer self-service payment portal"
+      "Customer self-service payment portal",
     ],
     challenges: [
       "Integrating with legacy Ubersmith billing system without disruption",
       "Ensuring PCI compliance across multiple payment processors",
-      "Handling currency conversion and international payment regulations"
+      "Handling currency conversion and international payment regulations",
     ],
     outcomes: [
       "Successfully acquired 1,500-customer company through AliPay integration",
       "Increased service renewal rates by 15% through improved payment UX",
-      "Expanded market reach into Asian territories with localized payment options"
+      "Expanded market reach into Asian territories with localized payment options",
     ],
-    category: "Payment Systems"
+    category: "Payment Systems",
   },
   {
     id: "chetor-performance",
@@ -201,7 +542,13 @@ const projects: ProjectData[] = [
     longDescription:
       "Created a comprehensive performance optimization suite for WordPress websites, focusing on dramatically improving page load speeds and user experience. The project involved developing custom plugins and themes with advanced techniques including intelligent lazy-loading, responsive image optimization, and efficient caching strategies.",
     impact: "45% improvement in page load speed",
-    technologies: ["WordPress", "Performance Optimization", "Lazy Loading", "Responsive Design", "PHP"],
+    technologies: [
+      "WordPress",
+      "Performance Optimization",
+      "Lazy Loading",
+      "Responsive Design",
+      "PHP",
+    ],
     metrics: ["45% Speed Improvement", "Custom Plugins", "User Experience"],
     color: "from-teal-500 to-blue-500",
     images: ["/projects/chetor.png"],
@@ -213,20 +560,20 @@ const projects: ProjectData[] = [
       "Custom WordPress plugins for performance enhancement",
       "Intelligent caching strategies for dynamic content",
       "CSS and JavaScript minification and bundling",
-      "Database query optimization for faster page loads"
+      "Database query optimization for faster page loads",
     ],
     challenges: [
       "Optimizing performance while maintaining WordPress compatibility",
       "Implementing lazy-loading without affecting SEO rankings",
-      "Balancing image quality with loading speed across devices"
+      "Balancing image quality with loading speed across devices",
     ],
     outcomes: [
       "Achieved 45% improvement in average page load times",
       "Improved Core Web Vitals scores across all optimized sites",
-      "Enhanced user engagement with reduced bounce rates"
+      "Enhanced user engagement with reduced bounce rates",
     ],
     demoUrl: "https://chetor.com",
-    category: "Performance Optimization"
+    category: "Performance Optimization",
   },
 ]
 
@@ -283,8 +630,9 @@ export const ProjectsSection = () => {
                 </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                A showcase of high-impact projects that demonstrate technical excellence, innovation,
-                and measurable business results across various industries and technologies.
+                A showcase of high-impact projects that demonstrate technical excellence,
+                innovation, and measurable business results across various industries and
+                technologies.
               </p>
             </div>
 
@@ -366,9 +714,9 @@ export const ProjectsSection = () => {
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Ready to Build Something Amazing?</h3>
                 <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  These projects represent just a fraction of what's possible when technical expertise
-                  meets creative problem-solving. Let's discuss how we can create impactful solutions
-                  together.
+                  These projects represent just a fraction of what's possible when technical
+                  expertise meets creative problem-solving. Let's discuss how we can create
+                  impactful solutions together.
                 </p>
                 <Button
                   size="lg"
@@ -385,11 +733,7 @@ export const ProjectsSection = () => {
         </div>
       </section>
 
-      <ProjectModal 
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
     </>
   )
 }
