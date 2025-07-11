@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -21,9 +22,12 @@ import {
   Cpu,
   ListTodo,
   UserMinus,
+  ArrowRight,
+  Terminal,
+  Layers,
 } from "lucide-react"
 import { ProjectModal, type ProjectData } from "./project-modal"
-import { projects } from "@/lib/projects-data"
+import { featuredProjects, projects } from "@/lib/projects-data"
 
 export const ProjectsSection = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -67,6 +71,7 @@ export const ProjectsSection = () => {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
+            {/* Header */}
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4">
                 Featured Projects
@@ -77,15 +82,32 @@ export const ProjectsSection = () => {
                   Impact
                 </span>
               </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
                 A showcase of high-impact projects that demonstrate technical excellence,
                 innovation, and measurable business results across various industries and
                 technologies.
               </p>
+
+              {/* Subtle project stats */}
+              <div className="flex justify-center items-center gap-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span>6 Featured</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>12+ Total Projects</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span>Live Demos</span>
+                </div>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project, index) => (
+            {/* Projects Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {featuredProjects.map((project, index) => (
                 <Card
                   key={index}
                   className="group md:hover:shadow-xl md:transition-all md:duration-300 md:hover:-translate-y-2 h-full"
@@ -158,7 +180,45 @@ export const ProjectsSection = () => {
               ))}
             </div>
 
-            <div className="mt-16 text-center">
+            {/* Integrated CTA - More subtle and cohesive */}
+            <div className="text-center">
+              <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl border border-dashed border-muted-foreground/20 bg-gradient-to-br from-muted/30 to-muted/10 backdrop-blur-sm">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
+                    <Terminal className="h-5 w-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-semibold mb-1">
+                      <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        More Projects
+                      </span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground">Explore the complete portfolio</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <Link href="/projects">
+                    <Button className="bg-gradient-to-r from-blue-600 to-purple-600 md:hover:from-blue-700 md:hover:to-purple-700 text-white shadow-md md:hover:shadow-lg transition-all duration-300 px-6 py-2 font-medium group">
+                      <span>View All Projects</span>
+                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
+                      <Layers className="h-3 w-3" />
+                      <span>{projects.length} Projects</span>
+                    </div>
+                    <div className="w-1 h-1 bg-muted-foreground/30 rounded-full"></div>
+                    <span>Live Demos Available</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom CTA Section - Collaboration focused */}
+            <div className="mt-20 text-center">
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-purple-900/20 rounded-2xl p-8">
                 <h3 className="text-2xl font-bold mb-4">Ready to Build Something Amazing?</h3>
                 <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">

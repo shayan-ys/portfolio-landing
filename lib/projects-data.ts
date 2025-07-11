@@ -537,10 +537,25 @@ export const categories = [
   "AI/ML",
   "Web Application",
   "Data Analytics",
-  "Payment Systems",
-  "Performance Optimization",
-  "AdTech Platform",
-  "Academic Research",
   "Voice Assistant",
+  "AdTech Platform",
+  "Payment Systems",
   "Social Media Tool",
+  "Enterprise",
+]
+
+// Top 6 most valuable projects for homepage (based on 2025 hiring trends)
+export const featuredProjects: ProjectData[] = [
+  // 1. AI Prompt Studio Platform - Most valuable for 2025 AI revolution
+  projects.find((p) => p.id === "sway-ai")!,
+  // 2. Vehicle Routing Optimization - Advanced algorithms & optimization
+  projects.find((p) => p.id === "vrptw-ga")!,
+  // 3. Currency Converter - High-scale production system
+  projects.find((p) => p.id === "oanda-currency-converter")!,
+  // 4. Data Visualization Suite - Data analytics in high demand
+  projects.find((p) => p.id === "oanda-data-visualization")!,
+  // 5. AI Game Quest Generator - AI research and innovation
+  projects.find((p) => p.id === "masters-thesis")!,
+  // 6. NextJS Embeddable App - Modern web technologies
+  projects.find((p) => p.id === "oanda-embeddable-app")!,
 ]
