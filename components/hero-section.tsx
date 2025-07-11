@@ -86,6 +86,22 @@ export const HeroSection = () => {
           className="shooting-star-v shooting-star-cyan"
           style={{ left: "640px", animationDelay: "7s" }}
         />
+        <div
+          className="shooting-star-v shooting-star-blue"
+          style={{ left: "800px", animationDelay: "9s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-purple"
+          style={{ left: "960px", animationDelay: "11s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-teal"
+          style={{ left: "1120px", animationDelay: "13s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-indigo"
+          style={{ left: "1280px", animationDelay: "15s" }}
+        />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -5,7 +5,8 @@ import {
   GraduationCap,
   Route,
   Mic,
-  CheckSquare,
+  Timer,
+  Calendar,
   Instagram,
   TrendingUp,
   Zap,
@@ -42,7 +43,7 @@ export const projects: ProjectData[] = [
     metrics: ["Dynamic Prompt Generation", "LLM Integration", "RAG Optimization"],
     color: "from-purple-500 to-pink-500",
     images: ["/projects/sway-ai-document-intelligence.webp"],
-    timeline: "Spring 2024 - Present",
+    timeline: "2024 - 2025",
     teamSize: "Individual contributor",
     keyFeatures: [
       "Dynamic prompt generation and fine-tuning capabilities",
@@ -63,7 +64,6 @@ export const projects: ProjectData[] = [
       "Reduced document processing time by 80% compared to manual methods",
       "Successfully deployed to production serving multiple enterprise clients",
     ],
-    demoUrl: "https://sway-ai.com",
     category: "AI/ML",
   },
   {
@@ -100,7 +100,7 @@ export const projects: ProjectData[] = [
       "Demonstrates React component architecture best practices",
       "Serves as a portfolio piece showcasing frontend development skills",
     ],
-    demoUrl: "http://app.shayanys.com/calculator/",
+    demoUrl: "/projects/calculator/index.html",
     category: "Web Application",
   },
   {
@@ -158,7 +158,7 @@ export const projects: ProjectData[] = [
     technologies: ["Genetic Algorithm", "Python", "C++", "Optimization", "Data Structures"],
     metrics: ["Multi-objective Optimization", "Constraint Handling", "Performance Analysis"],
     color: "from-orange-500 to-red-700",
-    images: ["/projects/VRPTW-ChatGPT-generated.png"],
+    images: ["/projects/VRPTW-ChatGPT-generated.webp"],
     timeline: "Academic Project",
     teamSize: "Individual contributor",
     keyFeatures: [
@@ -259,7 +259,7 @@ export const projects: ProjectData[] = [
       "Demonstrates practical web development skills",
       "Serves as a foundation for more complex project management applications",
     ],
-    demoUrl: "http://app.shayanys.com/todo/",
+    demoUrl: "/projects/todo/index.html",
     category: "Web Application",
   },
   {
@@ -302,7 +302,7 @@ export const projects: ProjectData[] = [
       "Demonstrates API integration and data processing skills",
       "Provides practical utility for social media management",
     ],
-    demoUrl: "http://app.shayanys.com/insta-non-followers/",
+    demoUrl: "/projects/insta-non-followers/index.html",
     category: "Social Media Tool",
   },
   {
@@ -448,7 +448,6 @@ export const projects: ProjectData[] = [
       "Processed over 10 million ad requests daily at peak",
       "Generated significant revenue growth for both advertisers and publishers",
     ],
-    demoUrl: "https://yektanet.com",
     category: "AdTech Platform",
   },
   {
@@ -530,12 +529,92 @@ export const projects: ProjectData[] = [
     demoUrl: "https://chetor.com",
     category: "Performance Optimization",
   },
+  {
+    id: "metronome-app",
+    icon: Timer,
+    title: "Metronome App",
+    company: "Personal Project",
+    description:
+      "A React-based metronome application with Redux state management and Material UI, providing precise timing for musicians and music practice.",
+    longDescription:
+      "Developed a feature-rich metronome application using React, Redux, and Material UI. The application provides accurate timing for musicians with customizable tempo, time signatures, and audio feedback. Built with modern React patterns and state management principles.",
+    impact: "Provides essential tool for musicians",
+    technologies: ["React.js", "Redux", "Material UI", "JavaScript", "Audio API"],
+    metrics: ["React + Redux", "Material UI", "Audio Integration"],
+    color: "from-indigo-500 to-purple-500",
+    images: ["/projects/metronome-screenshot.png"],
+    timeline: "Personal Project",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Adjustable tempo with BPM controls",
+      "Multiple time signatures support",
+      "Audio feedback with customizable sounds",
+      "Clean Material UI interface",
+      "Redux state management",
+      "Start/stop and tempo adjustment controls",
+    ],
+    challenges: [
+      "Implementing precise timing with Web Audio API",
+      "Managing audio playback state with Redux",
+      "Creating intuitive controls for tempo adjustment",
+    ],
+    outcomes: [
+      "Successfully deployed and publicly accessible",
+      "Demonstrates React with Redux architecture",
+      "Provides practical utility for musicians",
+    ],
+    demoUrl: "/projects/metronome/index.html",
+    category: "Web Application",
+  },
+  {
+    id: "fun-planner",
+    icon: Calendar,
+    title: "Fun Planner Mobile App",
+    company: "Personal Project",
+    description:
+      "A React Native mobile application for planning fun activities, available on both iOS and Google Play Store with seasonal filtering and activity management.",
+    longDescription:
+      "Created a comprehensive mobile application using React Native that helps users plan and organize fun activities throughout the year. The app features seasonal filtering, price range categorization, and activity management with intuitive navigation and modern UI components.",
+    impact: "Published on both App Store and Google Play",
+    technologies: [
+      "React Native",
+      "React Navigation",
+      "React Native Elements",
+      "Mobile Development",
+    ],
+    metrics: ["App Store Published", "Cross-platform", "Activity Management"],
+    color: "from-emerald-500 to-teal-500",
+    images: ["/projects/FunPlanner-screenshot.webp"],
+    timeline: "April 2020",
+    teamSize: "Individual contributor",
+    keyFeatures: [
+      "Activity creation and management",
+      "Seasonal filtering (Winter, Spring, Summer, Fall)",
+      "Price range categorization",
+      "Weekend/weekday filtering",
+      "Additional notes and customization",
+      "Cross-platform mobile compatibility",
+    ],
+    challenges: [
+      "Implementing cross-platform mobile development",
+      "Creating intuitive activity filtering system",
+      "Publishing to both App Store and Google Play Store",
+    ],
+    outcomes: [
+      "Successfully published on both iOS App Store and Google Play Store",
+      "Demonstrates React Native mobile development skills",
+      "Open-sourced on GitHub for community contribution",
+    ],
+    demoUrl: "/projects/funplanner",
+    category: "Mobile Application",
+  },
 ]
 
 export const categories = [
   "All Projects",
   "AI/ML",
   "Web Application",
+  "Mobile Application",
   "Data Analytics",
   "Voice Assistant",
   "AdTech Platform",

@@ -55,6 +55,8 @@ body {
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
     --radius: 0.5rem;
+    --shooting-star-opacity-light: 0.6;
+    --shooting-star-opacity-dark: 0.45;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -244,12 +246,8 @@ body {
   .shooting-star-h,
   .shooting-star-v {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    box-shadow:
-      0 0 8px currentColor,
-      0 0 16px currentColor;
+    width: 0;
+    height: 0;
     opacity: 0;
     pointer-events: none;
     will-change: transform, opacity;
@@ -263,12 +261,12 @@ body {
   .shooting-star-h::before {
     content: "";
     position: absolute;
-    top: -1px;
+    top: -1.5px;
     left: -80px;
     width: 80px;
-    height: 2px;
+    height: 3px;
     background: linear-gradient(90deg, transparent, currentColor);
-    border-radius: 1px;
+    border-radius: 1.5px;
   }
 
   /* Vertical shooting stars */
@@ -280,77 +278,109 @@ body {
     content: "";
     position: absolute;
     top: -80px;
-    left: -1px;
-    width: 2px;
+    left: -1.5px;
+    width: 3px;
     height: 80px;
     background: linear-gradient(180deg, transparent, currentColor);
-    border-radius: 1px;
+    border-radius: 1.5px;
   }
 
-  /* Muted color variations */
+  /* Vibrant color variations */
   .shooting-star-blue {
-    color: rgb(147 197 253 / 0.6); /* blue-300 with opacity */
+    color: rgb(
+      59 130 246 / var(--shooting-star-opacity-light)
+    ); /* blue-500 with CSS variable opacity */
   }
 
   .shooting-star-purple {
-    color: rgb(196 181 253 / 0.6); /* purple-300 with opacity */
+    color: rgb(
+      168 85 247 / var(--shooting-star-opacity-light)
+    ); /* purple-500 with CSS variable opacity */
   }
 
   .shooting-star-teal {
-    color: rgb(134 239 172 / 0.6); /* teal-300 with opacity */
+    color: rgb(
+      20 184 166 / var(--shooting-star-opacity-light)
+    ); /* teal-500 with CSS variable opacity */
   }
 
   .shooting-star-indigo {
-    color: rgb(165 180 252 / 0.6); /* indigo-300 with opacity */
+    color: rgb(
+      99 102 241 / var(--shooting-star-opacity-light)
+    ); /* indigo-500 with CSS variable opacity */
   }
 
   .shooting-star-emerald {
-    color: rgb(110 231 183 / 0.6); /* emerald-300 with opacity */
+    color: rgb(
+      16 185 129 / var(--shooting-star-opacity-light)
+    ); /* emerald-500 with CSS variable opacity */
   }
 
   .shooting-star-rose {
-    color: rgb(253 164 175 / 0.6); /* rose-300 with opacity */
+    color: rgb(
+      244 63 94 / var(--shooting-star-opacity-light)
+    ); /* rose-500 with CSS variable opacity */
   }
 
   .shooting-star-amber {
-    color: rgb(252 211 77 / 0.6); /* amber-300 with opacity */
+    color: rgb(
+      245 158 11 / var(--shooting-star-opacity-light)
+    ); /* amber-500 with CSS variable opacity */
   }
 
   .shooting-star-cyan {
-    color: rgb(103 232 249 / 0.6); /* cyan-300 with opacity */
+    color: rgb(
+      6 182 212 / var(--shooting-star-opacity-light)
+    ); /* cyan-500 with CSS variable opacity */
   }
 
   /* Dark mode adjustments for shooting stars */
   .dark .shooting-star-blue {
-    color: rgb(147 197 253 / 0.15); /* Further reduced opacity for dark mode */
+    color: rgb(
+      59 130 246 / var(--shooting-star-opacity-dark)
+    ); /* More muted blue-500 for dark mode */
   }
 
   .dark .shooting-star-purple {
-    color: rgb(196 181 253 / 0.15);
+    color: rgb(
+      168 85 247 / var(--shooting-star-opacity-dark)
+    ); /* More muted purple-500 for dark mode */
   }
 
   .dark .shooting-star-teal {
-    color: rgb(134 239 172 / 0.15);
+    color: rgb(
+      20 184 166 / var(--shooting-star-opacity-dark)
+    ); /* More muted teal-500 for dark mode */
   }
 
   .dark .shooting-star-indigo {
-    color: rgb(165 180 252 / 0.15);
+    color: rgb(
+      99 102 241 / var(--shooting-star-opacity-dark)
+    ); /* More muted indigo-500 for dark mode */
   }
 
   .dark .shooting-star-emerald {
-    color: rgb(110 231 183 / 0.15);
+    color: rgb(
+      16 185 129 / var(--shooting-star-opacity-dark)
+    ); /* More muted emerald-500 for dark mode */
   }
 
   .dark .shooting-star-rose {
-    color: rgb(253 164 175 / 0.15);
+    color: rgb(
+      244 63 94 / var(--shooting-star-opacity-dark)
+    ); /* More muted rose-500 for dark mode */
   }
 
   .dark .shooting-star-amber {
-    color: rgb(252 211 77 / 0.15);
+    color: rgb(
+      245 158 11 / var(--shooting-star-opacity-dark)
+    ); /* More muted amber-500 for dark mode */
   }
 
   .dark .shooting-star-cyan {
-    color: rgb(103 232 249 / 0.15);
+    color: rgb(
+      6 182 212 / var(--shooting-star-opacity-dark)
+    ); /* More muted cyan-500 for dark mode */
   }
 
   /* Keyframe animations */
@@ -393,23 +423,22 @@ body {
     .shooting-star-h,
     .shooting-star-v {
       animation-duration: 6s; /* Faster on mobile */
-      width: 3px;
-      height: 3px;
-      box-shadow:
-        0 0 6px currentColor,
-        0 0 12px currentColor;
+      width: 0;
+      height: 0;
     }
 
     .shooting-star-h::before {
       width: 60px;
-      height: 2px;
+      height: 3px;
       left: -60px;
+      top: -1.5px;
     }
 
     .shooting-star-v::before {
-      width: 2px;
+      width: 3px;
       height: 60px;
       top: -60px;
+      left: -1.5px;
     }
   }
 

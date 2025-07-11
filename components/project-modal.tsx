@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Calendar, Users, TrendingUp } from "lucide-react"
+import { Calendar, Users, TrendingUp, ExternalLink } from "lucide-react"
 import Image from "next/image"
 
 export interface ProjectData {
@@ -222,6 +222,32 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
                 ))}
               </div>
             </div>
+
+            {/* Demo CTA */}
+            {project.demoUrl && (
+              <div className="space-y-4 pt-4 border-t">
+                <h3 className="text-xl font-semibold">Try It Out</h3>
+                <div className="flex justify-center">
+                  <Button
+                    asChild
+                    size="lg"
+                    className={`bg-gradient-to-r ${project.color} hover:opacity-90 text-white font-semibold px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300`}
+                  >
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View live demo of ${project.title}`}
+                    >
+                      <span className="flex items-center gap-2">
+                        View Live Demo
+                        <ExternalLink className="h-4 w-4" />
+                      </span>
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </DialogContent>

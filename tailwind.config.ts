@@ -32,6 +32,8 @@ const config: Config = {
     "to-red-500",
     "from-teal-500",
     "to-blue-500",
+    "to-purple-500",
+    "from-emerald-500",
   ],
   theme: {
     extend: {

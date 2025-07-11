@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  min-height: 430px;
+}
+footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+nav a:hover {
+  text-decoration: none;
+}
+.by-tech {
+  display: inline-block;
+  color: inherit;
+}
+.lg-text {
+  display: inline;
+}
+@media (max-width: 768px) {
+  .lg-text {
+    display: none;
+  }
+}
+@media (max-width: 475px) {
+  .sx-text {
+    display: none;
+  }
+}
+.container {
+  max-width: 600px;
+}
+.todo-list {
+  margin-bottom: 37px;
+}
+input.new-todo {
+  width: 90%;
+}
+button.add-button {
+  border-radius: 100%;
+  margin: -5px 0 0 3px;
+  font-size: 20px;
+}
+.input-button-wrapper {
+  float: left;
+  width: 100%;
+}
+.input-wrapper {
+  float: right;
+  width: 100%;
+  margin-right: 200px;
+}
+.button-wrapper {
+  float: right;
+  width: 200px;
+}
+.todo-list li {
+  list-style: none;
+  margin-top: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+.todo-list li i.completed {
+  margin-right: 13px;
+}
+.todo-list li.is-done {
+  text-decoration: line-through;
+  color: grey;
+}
+.todo-list li button.delete {
+  background: none;
+  border: 0;
+  float: right;
+  color: #a9a9a9;
+  padding: 0 17px;
+}
+.todo-list li button.delete:hover {
+  color: #000;
+}
+/*# sourceMappingURL=main.ba6d64ec.chunk.css.map */
