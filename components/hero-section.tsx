@@ -29,7 +29,9 @@ export const HeroSection = () => {
     const link = document.createElement("a")
     link.href = "/resume.pdf"
     link.download = "Shayan_Yousefian_Resume.pdf"
+    document.body.appendChild(link)
     link.click()
+    document.body.removeChild(link)
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
