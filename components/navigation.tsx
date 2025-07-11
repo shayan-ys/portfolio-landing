@@ -23,6 +23,10 @@ export const Navigation = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
+
+    // Check scroll position on mount
+    handleScroll()
+
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
