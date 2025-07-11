@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.Metronome_FooterBar__2Sa-X {
+  position: static;
+  top: auto !important;
+  bottom: 0;
+  flex-grow: 1;
+  color: #777;
+  padding: 17px;
+  text-align: center;
+}
+.Buttons_SpeedNumberInput__kzHBO {
+  width: 85px;
+}
+.Buttons_SliderRowWrapper__1_kU8 {
+  margin-bottom: 5px !important;
+}
+.Slider_Slider__1ZFiO {
+  color: red;
+}
+/*# sourceMappingURL=main.8c545636.chunk.css.map */

@@ -29,7 +29,9 @@ export const HeroSection = () => {
     const link = document.createElement("a")
     link.href = "/resume.pdf"
     link.download = "Shayan_Yousefian_Resume.pdf"
+    document.body.appendChild(link)
     link.click()
+    document.body.removeChild(link)
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, action: () => void) => {
@@ -85,6 +87,22 @@ export const HeroSection = () => {
         <div
           className="shooting-star-v shooting-star-cyan"
           style={{ left: "640px", animationDelay: "7s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-blue"
+          style={{ left: "800px", animationDelay: "9s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-purple"
+          style={{ left: "960px", animationDelay: "11s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-teal"
+          style={{ left: "1120px", animationDelay: "13s" }}
+        />
+        <div
+          className="shooting-star-v shooting-star-indigo"
+          style={{ left: "1280px", animationDelay: "15s" }}
         />
       </div>
 

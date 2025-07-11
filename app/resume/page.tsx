@@ -1,49 +1,45 @@
-"use client"
+import type { Metadata } from "next"
+import ResumeClient from "./resume-client"
 
-import { Download, FileText, FileDown } from "lucide-react"
-
-const ResumePage = () => {
-  const handleDownload = (format: "pdf" | "md") => {
-    if (format === "pdf") {
-      const link = document.createElement("a")
-      link.href = "/resume.pdf"
-      link.download = "Shayan_Yousefian_Resume.pdf"
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      return
-    }
-    const link = document.createElement("a")
-    link.href = "/resume.md"
-    link.download = "Shayan_Yousefian_Resume.md"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
-  return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
-      <div className="flex flex-col gap-4 w-full max-w-sm">
-        <button
-          onClick={() => handleDownload("pdf")}
-          className="flex items-center justify-center gap-3 px-6 py-4 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2"
-          aria-label="Download resume as PDF"
-        >
-          <FileDown className="w-5 h-5" />
-          <span>Download as PDF</span>
-        </button>
-
-        <button
-          onClick={() => handleDownload("md")}
-          className="flex items-center justify-center gap-3 px-6 py-4 bg-white border border-neutral-900 text-neutral-900 hover:bg-neutral-100 font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2"
-          aria-label="Download resume as Markdown"
-        >
-          <FileText className="w-5 h-5" />
-          <span>Download as Markdown</span>
-        </button>
-      </div>
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "Resume - Shayan Yousefian | Senior Software Engineer & AI Innovator",
+  description:
+    "Download Shayan Yousefian's professional resume featuring expertise in AI/ML, full-stack development, team leadership, and enterprise software solutions. Available in PDF and Markdown formats.",
+  keywords: [
+    "Shayan Yousefian resume",
+    "software engineer resume",
+    "AI developer resume",
+    "full-stack developer resume",
+    "senior software engineer",
+    "AI innovator",
+    "React developer",
+    "Next.js developer",
+    "TypeScript developer",
+    "Toronto developer",
+  ],
+  openGraph: {
+    title: "Resume - Shayan Yousefian | Senior Software Engineer & AI Innovator",
+    description:
+      "Download Shayan Yousefian's professional resume featuring expertise in AI/ML, full-stack development, team leadership, and enterprise software solutions.",
+    images: [
+      {
+        url: "/profile.jpg",
+        width: 553,
+        height: 553,
+        alt: "Shayan Yousefian - Senior Software Engineer & AI Innovator",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Resume - Shayan Yousefian | Senior Software Engineer & AI Innovator",
+    description:
+      "Download Shayan Yousefian's professional resume featuring expertise in AI/ML, full-stack development, and team leadership.",
+    images: ["/profile.jpg"],
+  },
 }
 
-export default ResumePage
+export default function ResumePage() {
+  return <ResumeClient />
+}
