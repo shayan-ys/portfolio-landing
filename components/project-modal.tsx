@@ -96,42 +96,47 @@ export const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) =>
 
           {/* Content */}
           <div className="p-6 space-y-8">
-            {/* Images */}
-            {project.images.length > 0 && (
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold">Project Screenshots</h3>
-                <div className={`grid gap-4 ${project.images.length > 1 ? "md:grid-cols-2" : ""}`}>
-                  {project.images.map((image, index) => (
-                    <div
-                      key={index}
-                      className="relative rounded-lg overflow-hidden border bg-muted/50"
-                    >
+            {/* Screenshots and Project Overview Row */}
+            <div className={`grid gap-8 ${project.images.length > 0 ? "md:grid-cols-2" : ""}`}>
+              {/* Images */}
+              {project.images.length > 0 && (
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold">Project Screenshots</h3>
+                  <div
+                    className={`grid gap-4 ${project.images.length > 1 ? "grid-cols-1 lg:grid-cols-2" : ""}`}
+                  >
+                    {project.images.map((image, index) => (
                       <div
-                        className={`relative aspect-video transition-opacity duration-500 ${isImageLoaded ? "opacity-100" : "opacity-0"}`}
+                        key={index}
+                        className="relative rounded-lg overflow-hidden border bg-muted/50"
                       >
-                        <Image
-                          src={image}
-                          alt={`${project.title} screenshot ${index + 1}`}
-                          fill
-                          className="object-cover"
-                          onLoad={handleImageLoad}
-                        />
-                      </div>
-                      {!isImageLoaded && (
-                        <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
-                          <div className="text-muted-foreground text-sm">Loading...</div>
+                        <div
+                          className={`relative aspect-video transition-opacity duration-500 ${isImageLoaded ? "opacity-100" : "opacity-0"}`}
+                        >
+                          <Image
+                            src={image}
+                            alt={`${project.title} screenshot ${index + 1}`}
+                            fill
+                            className="object-cover"
+                            onLoad={handleImageLoad}
+                          />
                         </div>
-                      )}
-                    </div>
-                  ))}
+                        {!isImageLoaded && (
+                          <div className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center">
+                            <div className="text-muted-foreground text-sm">Loading...</div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Description */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold">Project Overview</h3>
-              <p className="text-muted-foreground leading-relaxed">{project.longDescription}</p>
+              {/* Description */}
+              <div className="space-y-4">
+                <h3 className="text-xl font-semibold">Project Overview</h3>
+                <p className="text-muted-foreground leading-relaxed">{project.longDescription}</p>
+              </div>
             </div>
 
             {/* Impact & Metrics */}
