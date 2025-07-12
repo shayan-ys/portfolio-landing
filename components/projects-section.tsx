@@ -166,15 +166,26 @@ export const ProjectsSection = () => {
                       )}
                     </div>
 
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full mt-auto md:group-hover:bg-blue-50 dark:md:group-hover:bg-blue-950"
-                      onClick={() => handleViewDetails(project)}
-                    >
-                      View Details
-                      <ExternalLink className="ml-2 h-3 w-3" />
-                    </Button>
+                    <div className="flex gap-2 mt-auto">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 md:group-hover:bg-blue-50 dark:md:group-hover:bg-blue-950"
+                        onClick={() => handleViewDetails(project)}
+                      >
+                        View Details
+                      </Button>
+                      {project.demoUrl && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="px-3"
+                          onClick={() => window.open(project.demoUrl, "_blank")}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
