@@ -69,18 +69,20 @@ export const ProjectsSection = () => {
               </p>
 
               {/* Subtle project stats */}
-              <div className="flex justify-center items-center gap-8 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
+              <div className="space-y-4 md:space-y-0 md:flex md:justify-center md:items-center md:gap-8 text-center">
+                <div className="flex items-center justify-center gap-3 md:gap-2">
                   <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span>6 Featured</span>
+                  <span className="text-sm text-muted-foreground">6 Featured</span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-3 md:gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>12+ Total Projects</span>
+                  <span className="text-sm text-muted-foreground">
+                    {projects.length} Total Projects
+                  </span>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-3 md:gap-2">
                   <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Live Demos</span>
+                  <span className="text-sm text-muted-foreground">Live Demos</span>
                 </div>
               </div>
             </div>
