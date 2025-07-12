@@ -5,27 +5,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import {
-  ExternalLink,
-  Users,
-  TrendingUp,
-  Zap,
-  Brain,
-  Globe,
-  Calculator,
-  GraduationCap,
-  Route,
-  Mic,
-  CheckSquare,
-  Instagram,
-  Gamepad2,
-  Cpu,
-  ListTodo,
-  UserMinus,
-  ArrowRight,
-  Terminal,
-  Layers,
-} from "lucide-react"
+import { ExternalLink, TrendingUp, ArrowRight, Terminal, Layers } from "lucide-react"
 import { ProjectModal, type ProjectData } from "./project-modal"
 import { featuredProjects, projects } from "@/lib/projects-data"
 
