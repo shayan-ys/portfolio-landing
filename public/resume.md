@@ -11,7 +11,7 @@ Toronto, Canada
 
 ### Senior Software Engineer — Sway AI
 
-_Spring 2024 – Present_
+_Spring 2024 – Summer 2025_
 
 - Engineered intuitive prompt studio tools enabling dynamic prompt generation and fine-tuning for internal and customer-facing LLM applications.
 - Led the technical design and documentation of pivot table widget features, coordinating front-end, back-end, and microservices tasks to ensure cohesive implementation.
