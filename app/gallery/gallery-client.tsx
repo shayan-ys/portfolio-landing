@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useState, useCallback, useMemo, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { MasonryPhotoAlbum } from "react-photo-album"
@@ -16,90 +16,155 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom"
 import "yet-another-react-lightbox/plugins/thumbnails.css"
 
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, Grid3X3, Clock } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { ArrowLeft, Grid3X3, Clock, ArrowUpDown } from "lucide-react"
 import type { GalleryImage } from "@/lib/image-utils"
 
 interface GalleryClientProps {
   images: GalleryImage[]
 }
 
+type SortOrder = "newest" | "oldest"
+
 const GalleryClient = ({ images }: GalleryClientProps) => {
   const [index, setIndex] = useState(-1)
   const [isLoading, setIsLoading] = useState(false)
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest")
+  const captionTimerRef = useRef<NodeJS.Timeout | null>(null)
+
+  // Sort images based on selected order
+  const sortedImages = useMemo(() => {
+    return [...images].sort((a, b) => {
+      if (sortOrder === "newest") {
+        return b.createdAt.getTime() - a.createdAt.getTime()
+      } else {
+        return a.createdAt.getTime() - b.createdAt.getTime()
+      }
+    })
+  }, [images, sortOrder])
 
   // Convert gallery images to react-photo-album format
   const photoAlbumImages = useMemo(
     () =>
-      images.map((image) => ({
+      sortedImages.map((image) => ({
         src: image.src,
         width: image.width,
         height: image.height,
         alt: image.alt,
         blurDataURL: image.blurDataURL,
+        year: image.createdAt.getFullYear(),
       })),
-    [images]
+    [sortedImages]
   )
 
-  // Convert to lightbox slides format
+  // Convert to lightbox slides format (maintain original order for lightbox)
   const lightboxSlides = useMemo(
     () =>
-      images.map((image) => ({
+      sortedImages.map((image) => ({
         src: image.src,
         alt: image.alt,
         width: image.width,
         height: image.height,
       })),
-    [images]
+    [sortedImages]
   )
 
   const handlePhotoClick = useCallback(({ index: photoIndex }: { index: number }) => {
     setIndex(photoIndex)
   }, [])
 
-  // Custom image render function with progressive loading
-  const renderPhoto = useCallback(
-    ({ photo, imageProps: { alt, style, ...restImageProps } }: any) => {
-      return (
-        <div
-          style={{
-            ...style,
-            position: "relative",
-            overflow: "hidden",
-            borderRadius: "8px",
-            cursor: "pointer",
-            transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-          }}
-          className="group hover:shadow-lg hover:shadow-black/20 hover:scale-[1.02] active:scale-[0.98]"
-        >
-          <Image
-            {...restImageProps}
-            alt={alt}
-            src={photo.src}
-            placeholder="blur"
-            blurDataURL={photo.blurDataURL}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            quality={75}
-            priority={false}
-            style={{
-              ...style,
-              objectFit: "cover",
-              transition: "all 0.3s ease",
-            }}
-            className="group-hover:brightness-110"
-          />
+  const handleSortChange = useCallback((value: SortOrder) => {
+    setSortOrder(value)
+  }, [])
 
-          {/* Hover overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-      )
-    },
-    []
-  )
+  // Add year captions after gallery renders using robust matching
+  useEffect(() => {
+    const addYearCaptions = () => {
+      // First, remove any existing captions
+      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
+
+      // Find all photo containers
+      const photoElements = document.querySelectorAll(".react-photo-album--photo img")
+
+      photoElements.forEach((img, index) => {
+        const imgElement = img as HTMLImageElement
+        const container = imgElement.closest(".react-photo-album--photo") as HTMLElement
+
+        if (container && imgElement.src && sortedImages.length > 0) {
+          let matchingImage = null
+
+          // Strategy 1: Try matching by path ending (handles domain differences)
+          if (!matchingImage) {
+            const domPath = imgElement.src.split("/").slice(-2).join("/") // Get last 2 parts of path
+            matchingImage = sortedImages.find((image) => image.src.endsWith(domPath))
+          }
+
+          // Strategy 2: Use alt attribute matching if available
+          if (!matchingImage && imgElement.alt) {
+            matchingImage = sortedImages.find((image) => image.alt === imgElement.alt)
+          }
+
+          // Get the year from matched image or use current year as fallback
+          if (matchingImage) {
+            const year = matchingImage.createdAt.getFullYear()
+
+            // Create year caption element
+            const caption = document.createElement("div")
+            caption.className = "year-caption"
+            caption.style.cssText =
+              "position: absolute; bottom: 8px; right: 8px; background: rgba(0, 0, 0, 0.5); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; z-index: 10; backdrop-filter: blur(4px);"
+            caption.textContent = year.toString()
+
+            // Make container relative and add caption
+            container.style.position = "relative"
+            container.appendChild(caption)
+          }
+        }
+      })
+    }
+
+    // Clear any existing timer
+    if (captionTimerRef.current) {
+      clearTimeout(captionTimerRef.current)
+    }
+
+    // Add captions after a delay to ensure gallery is rendered
+    captionTimerRef.current = setTimeout(addYearCaptions, 500)
+
+    // Handle window resize - re-add captions after masonry re-renders
+    const handleResize = () => {
+      // Clear existing timer and captions
+      if (captionTimerRef.current) {
+        clearTimeout(captionTimerRef.current)
+      }
+      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
+
+      // Re-add captions after masonry finishes re-rendering
+      captionTimerRef.current = setTimeout(addYearCaptions, 300)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      if (captionTimerRef.current) {
+        clearTimeout(captionTimerRef.current)
+      }
+      window.removeEventListener("resize", handleResize)
+      // Clean up captions when component unmounts or dependencies change
+      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
+    }
+  }, [sortedImages, sortOrder]) // Re-run when images or sort order changes
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -116,9 +181,19 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
                 <Grid3X3 className="h-4 w-4" />
                 <span>{images.length} photos</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                <Clock className="h-4 w-4" />
-                <span>Newest first</span>
+
+              {/* Sort dropdown */}
+              <div className="flex items-center space-x-2">
+                <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                <Select value={sortOrder} onValueChange={handleSortChange}>
+                  <SelectTrigger className="w-32 h-8 text-sm">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="newest">Newest</SelectItem>
+                    <SelectItem value="oldest">Oldest</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
@@ -129,8 +204,10 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Gallery Title */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Photo Gallery
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent">
+              Photo Gallery
+            </span>
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
             A visual journey through moments captured, experiences shared, and memories preserved.
@@ -141,18 +218,20 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
 
         {/* Photo Album */}
         {images.length > 0 ? (
-          <MasonryPhotoAlbum
-            photos={photoAlbumImages}
-            columns={(containerWidth) => {
-              if (containerWidth < 640) return 1
-              if (containerWidth < 1024) return 2
-              if (containerWidth < 1536) return 3
-              return 4
-            }}
-            spacing={12}
-            padding={0}
-            onClick={handlePhotoClick}
-          />
+          <div className="relative">
+            <MasonryPhotoAlbum
+              photos={photoAlbumImages}
+              columns={(containerWidth) => {
+                if (containerWidth < 640) return 1
+                if (containerWidth < 1024) return 2
+                if (containerWidth < 1536) return 3
+                return 4
+              }}
+              spacing={6}
+              padding={0}
+              onClick={handlePhotoClick}
+            />
+          </div>
         ) : (
           <div className="text-center py-16">
             <Grid3X3 className="h-16 w-16 mx-auto text-muted-foreground/50 mb-4" />
