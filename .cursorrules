@@ -34,3 +34,6 @@ Follow these rules when you write code:
 
 # Run locally
 First make sure a running dev instance doesn't exist, otherwise kill it and run again. To make sure not more than one dev server is running at the same time.
+
+# Git Commit
+Use sentence capitalization e.g. git commit -m "feat(gallery): Add site logo with smooth scroll to top functionality
