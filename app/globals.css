@@ -449,4 +449,11 @@ body {
       transform: translate3d(0, 0, 0); /* Force GPU acceleration */
     }
   }
+
+  /* Yet Another React Lightbox mobile button hiding */
+  .mobile-lightbox .yarl__button[title*="Zoom"],
+  .mobile-lightbox .yarl__button[title*="Fullscreen"],
+  .mobile-lightbox .yarl__button[title*="Close"] {
+    display: none !important;
+  }
 }

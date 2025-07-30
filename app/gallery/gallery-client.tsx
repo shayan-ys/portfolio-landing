@@ -8,10 +8,8 @@ import "yet-another-react-lightbox/styles.css"
 
 // Import lightbox plugins
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen"
-import Slideshow from "yet-another-react-lightbox/plugins/slideshow"
-import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails"
+import Share from "yet-another-react-lightbox/plugins/share"
 import Zoom from "yet-another-react-lightbox/plugins/zoom"
-import "yet-another-react-lightbox/plugins/thumbnails.css"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -101,6 +99,7 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
       // Check if screen is mobile (less than 640px - sm breakpoint)
       const mobile = window.innerWidth < 640
       if (mobile !== isMobile) {
+        console.log("Mobile detection changed:", { width: window.innerWidth, isMobile: mobile })
         setIsMobile(mobile)
       }
     }
@@ -119,11 +118,15 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
   // Convert to lightbox slides format (maintain original order for lightbox)
   const lightboxSlides = useMemo(
     () =>
-      sortedImages.map((image) => ({
+      sortedImages.map((image, index) => ({
         src: image.src,
         alt: image.alt,
         width: image.width,
         height: image.height,
+        share: {
+          url: `${image.src}?ref=share`,
+          title: "Photo from Shayan's Gallery",
+        },
       })),
     [sortedImages]
   )
@@ -292,7 +295,7 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        plugins={[Fullscreen, Slideshow, Thumbnails, Zoom]}
+        plugins={[Fullscreen, Share, Zoom]}
         // Animation settings
         animation={{ fade: 300, swipe: 500 }}
         // Carousel settings optimized for touch
@@ -305,32 +308,15 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
         }}
         // Zoom plugin settings
         zoom={{
-          maxZoomPixelRatio: 3,
+          maxZoomPixelRatio: 1,
           zoomInMultiplier: 2,
           doubleTapDelay: 300,
           doubleClickDelay: 300,
-          doubleClickMaxStops: 2,
+          doubleClickMaxStops: 1,
           keyboardMoveDistance: 50,
           wheelZoomDistanceFactor: 100,
           pinchZoomDistanceFactor: 100,
           scrollToZoom: true,
-        }}
-        // Thumbnails plugin settings
-        thumbnails={{
-          position: "bottom",
-          width: 120,
-          height: 80,
-          border: 2,
-          borderRadius: 4,
-          padding: 4,
-          gap: 16,
-          imageFit: "cover",
-          vignette: true,
-        }}
-        // Slideshow plugin settings
-        slideshow={{
-          autoplay: false,
-          delay: 3000,
         }}
         // Controller settings for touch interactions
         controller={{
@@ -354,11 +340,14 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
             padding: "8px",
           },
         }}
+        // Custom CSS class for mobile button hiding
+        className={isMobile ? "mobile-lightbox" : ""}
         // Touch gestures
         on={{
           view: ({ index: slideIndex }) => {
             // Optional: Track view analytics
             console.log(`Viewing image ${slideIndex + 1} of ${images.length}`)
+            console.log("Lightbox opened - Mobile state:", { isMobile, width: window.innerWidth })
           },
         }}
       />
