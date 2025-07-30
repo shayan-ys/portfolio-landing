@@ -35,7 +35,6 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
   const [index, setIndex] = useState(-1)
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest")
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
-  const [windowWidth, setWindowWidth] = useState(1200) // Default for SSR
 
   // Sort images based on selected order
   const sortedImages = useMemo(() => {
@@ -76,57 +75,6 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
 
   const handleSortChange = useCallback((value: SortOrder) => {
     setSortOrder(value)
-  }, [])
-
-  // Calculate masonry layout to maintain proper ordering (row-first, not column-first)
-  const masonryLayout = useMemo(() => {
-    const getColumnCount = (width: number) => {
-      if (width < 640) return 1
-      if (width < 1024) return 2
-      if (width < 1536) return 3
-      return 4
-    }
-
-    const columnCount = getColumnCount(windowWidth)
-    const columns: Array<{ images: typeof sortedImages; height: number }> = []
-
-    // Initialize columns
-    for (let i = 0; i < columnCount; i++) {
-      columns.push({ images: [], height: 0 })
-    }
-
-    // Distribute images to columns (shortest column first to maintain balance)
-    sortedImages.forEach((image) => {
-      // Find the column with the least height
-      const shortestColumnIndex = columns.reduce((minIndex, column, index) => {
-        return columns[minIndex].height > column.height ? index : minIndex
-      }, 0)
-
-      // Add image to the shortest column
-      columns[shortestColumnIndex].images.push(image)
-      // Estimate height based on aspect ratio (for better column balance)
-      const aspectRatio = image.height / image.width
-      columns[shortestColumnIndex].height += aspectRatio * 300 // Base width estimate
-    })
-
-    return columns
-  }, [sortedImages, windowWidth])
-
-  // Set initial window width and handle resize
-  useEffect(() => {
-    const updateWindowWidth = () => {
-      setWindowWidth(window.innerWidth)
-    }
-
-    // Set initial width
-    updateWindowWidth()
-
-    // Add resize listener
-    window.addEventListener("resize", updateWindowWidth)
-
-    return () => {
-      window.removeEventListener("resize", updateWindowWidth)
-    }
   }, [])
 
   return (
@@ -187,32 +135,27 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
         {/* Photo Gallery */}
         {images.length > 0 ? (
           <div className="relative">
-            {/* Proper Masonry Grid (row-first ordering) */}
-            <div className="flex gap-3 sm:gap-4 md:gap-6 items-start">
-              {masonryLayout.map((column, columnIndex) => (
-                <div key={columnIndex} className="flex-1 space-y-3 sm:space-y-4 md:space-y-6">
-                  {column.images.map((image) => {
-                    const originalIndex = sortedImages.findIndex((img) => img.src === image.src)
-                    return (
-                      <div key={image.src} className="relative">
-                        <OptimizedImage
-                          src={image.src}
-                          alt={image.alt}
-                          width={image.width}
-                          height={image.height}
-                          blurDataURL={image.blurDataURL}
-                          onLoad={() => handleImageLoad(image.src)}
-                          onClick={() => handlePhotoClick(originalIndex, image.src)}
-                          className="w-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
-                          priority={originalIndex < 6} // Prioritize first 6 images
-                        />
-                        {/* Year caption */}
-                        <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
-                          {image.createdAt.getFullYear()}
-                        </div>
-                      </div>
-                    )
-                  })}
+            {/* CSS-based responsive masonry grid */}
+            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 md:gap-6">
+              {sortedImages.map((image, imageIndex) => (
+                <div key={image.src} className="break-inside-avoid mb-3 sm:mb-4 md:mb-6">
+                  <div className="relative">
+                    <OptimizedImage
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                      blurDataURL={image.blurDataURL}
+                      onLoad={() => handleImageLoad(image.src)}
+                      onClick={() => handlePhotoClick(imageIndex, image.src)}
+                      className="w-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                      priority={imageIndex < 6} // Prioritize first 6 images
+                    />
+                    {/* Year caption */}
+                    <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
+                      {image.createdAt.getFullYear()}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

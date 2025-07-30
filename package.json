@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next build",
+    "build": "npm run generate:placeholders && next build",
     "dev": "next dev",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

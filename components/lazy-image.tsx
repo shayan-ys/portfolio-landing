@@ -38,15 +38,15 @@ const OptimizedImage = ({
 
   return (
     <div
-      className={cn("relative overflow-hidden group cursor-pointer", className)}
+      className={cn("relative overflow-hidden", className)}
       style={{
         aspectRatio: `${width} / ${height}`,
       }}
-      onClick={isLoaded ? onClick : undefined}
+      onClick={onClick}
       role={onClick ? "button" : undefined}
       tabIndex={onClick ? 0 : -1}
       onKeyDown={
-        onClick && isLoaded
+        onClick
           ? (e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault()
@@ -61,7 +61,7 @@ const OptimizedImage = ({
         src={src}
         alt={alt}
         fill
-        className="object-cover transition-all duration-300 group-hover:scale-105"
+        className="object-cover"
         placeholder="blur"
         blurDataURL={blurDataURL}
         priority={priority}
@@ -77,13 +77,13 @@ const OptimizedImage = ({
         </div>
       )}
 
-      {/* Hover overlay for loaded images */}
-      {isLoaded && onClick && (
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200" />
-      )}
+      {/* Click overlay when not fully loaded */}
+      {!isLoaded && onClick && <div className="absolute inset-0 cursor-not-allowed" />}
 
-      {/* Loading overlay to prevent clicks during loading */}
-      {!isLoaded && <div className="absolute inset-0 bg-transparent cursor-wait" />}
+      {/* Hover effect when fully loaded */}
+      {isLoaded && onClick && (
+        <div className="absolute inset-0 bg-black/0 hover:bg-black/10 transition-colors duration-200 cursor-pointer" />
+      )}
     </div>
   )
 }

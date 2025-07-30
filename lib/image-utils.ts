@@ -112,30 +112,82 @@ export const getImageCreationDate = async (imagePath: string, fileName: string):
   }
 }
 
-// Generate a blur placeholder data URL (simplified version)
-export const generateBlurDataURL = (width: number, height: number): string => {
-  // Create a simple SVG blur placeholder with a subtle gradient
-  const svg = `
-    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:rgb(230,230,230);stop-opacity:0.8" />
-          <stop offset="50%" style="stop-color:rgb(240,240,240);stop-opacity:0.6" />
-          <stop offset="100%" style="stop-color:rgb(220,220,220);stop-opacity:0.8" />
-        </linearGradient>
-      </defs>
-      <rect width="100%" height="100%" fill="url(#grad)" />
-    </svg>
-  `
+// Get pre-generated blur data URL from build-time generated placeholders
+export const generateBlurDataURL = async (imagePath: string): Promise<string> => {
+  try {
+    // Extract filename from path and create placeholder path
+    const fileName = imagePath.split("/").pop() || ""
+    const baseName = fileName.replace(/\.[^.]+$/, "") // Remove extension
+    const placeholderFileName = `${baseName}.webp`
+    const placeholderPath = join(
+      process.cwd(),
+      "public",
+      "gallery",
+      "placeholders",
+      placeholderFileName
+    )
 
-  return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`
+    try {
+      // Try to read the pre-generated placeholder file
+      const placeholderBuffer = await sharp(placeholderPath).toBuffer()
+      const base64 = placeholderBuffer.toString("base64")
+      return `data:image/webp;base64,${base64}`
+    } catch (placeholderError) {
+      console.warn(
+        `Could not find pre-generated placeholder for ${imagePath}, falling back to runtime generation:`,
+        placeholderError
+      )
+
+      // Fallback to runtime generation if placeholder doesn't exist
+      const imageBuffer = await sharp(imagePath)
+        .resize(8, null, {
+          fit: "inside",
+          withoutEnlargement: true,
+        })
+        .webp({ quality: 75 })
+        .toBuffer()
+
+      const base64 = imageBuffer.toString("base64")
+      return `data:image/webp;base64,${base64}`
+    }
+  } catch (error) {
+    console.warn(`Could not generate blur data URL for ${imagePath}:`, error)
+
+    // Ultimate fallback to a simple gray placeholder
+    return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOsa2yqBwAFCAICLICSyQAAAABJRU5ErkJggg=="
+  }
 }
 
-// Note: Remote blur generation commented out since we're using local images only
-// If needed for remote images, use a simple SVG placeholder instead of Sharp
-// export const generateRemoteBlurDataURL = async (imageUrl: string): Promise<string> => {
-//   return generateBlurDataURL(400, 300) // Use default dimensions for remote images
-// }
+// Generate blur data URL for remote images (still runtime since we can't pre-generate remote images)
+export const generateRemoteBlurDataURL = async (imageUrl: string): Promise<string> => {
+  try {
+    // Fetch the remote image
+    const response = await fetch(imageUrl)
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`)
+    }
+
+    const imageBuffer = Buffer.from(await response.arrayBuffer())
+
+    // Generate blur using Sharp with updated parameters to match build-time generation
+    const blurBuffer = await sharp(imageBuffer)
+      .resize(8, null, {
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 75 })
+      .toBuffer()
+
+    // Convert to base64 data URL
+    const base64 = blurBuffer.toString("base64")
+    return `data:image/webp;base64,${base64}`
+  } catch (error) {
+    console.warn(`Could not generate blur data URL for remote image ${imageUrl}:`, error)
+
+    // Fallback to a simple gray placeholder
+    return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOsa2yqBwAFCAICLICSyQAAAABJRU5ErkJggg=="
+  }
+}
 
 // Get all gallery images with metadata and blur data URLs
 export const getGalleryImages = async (): Promise<GalleryImage[]> => {
@@ -154,12 +206,11 @@ export const getGalleryImages = async (): Promise<GalleryImage[]> => {
       const publicPath = `/gallery/${fileName}`
 
       try {
-        const [dimensions, createdAt] = await Promise.all([
+        const [dimensions, createdAt, blurDataURL] = await Promise.all([
           getImageDimensions(imagePath),
           getImageCreationDate(imagePath, fileName),
+          generateBlurDataURL(imagePath),
         ])
-
-        const blurDataURL = generateBlurDataURL(dimensions.width, dimensions.height)
 
         images.push({
           src: publicPath,
