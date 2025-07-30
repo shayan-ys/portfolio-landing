@@ -153,7 +153,8 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/" className="flex items-center space-x-2">
                   <ArrowLeft className="h-4 w-4" />
-                  <span>Back to Portfolio</span>
+                  <span className="hidden sm:inline">Back to Portfolio</span>
+                  <span className="sm:hidden">Home</span>
                 </Link>
               </Button>
             </div>
@@ -188,21 +189,21 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
                     className="w-full h-full object-contain rounded-md hidden dark:block"
                   />
                 </div>
-                <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="hidden sm:inline font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Gallery
                 </span>
               </button>
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
                 <Grid3X3 className="h-4 w-4" />
                 <span>{images.length} photos</span>
               </div>
 
               {/* Sort dropdown */}
               <div className="flex items-center space-x-2">
-                <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
+                <ArrowUpDown className="hidden sm:block h-4 w-4 text-muted-foreground" />
                 <Select value={sortOrder} onValueChange={handleSortChange}>
                   <SelectTrigger className="w-32 h-8 text-sm">
                     <SelectValue />
