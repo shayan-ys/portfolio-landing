@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useMemo, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import Lightbox from "yet-another-react-lightbox"
 import "yet-another-react-lightbox/styles.css"
 
@@ -35,6 +36,9 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
   const [index, setIndex] = useState(-1)
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest")
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
+  const [masonryColumns, setMasonryColumns] = useState<GalleryImage[][]>([])
+  const [columnCount, setColumnCount] = useState(1)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   // Sort images based on selected order
   const sortedImages = useMemo(() => {
@@ -46,6 +50,64 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
       }
     })
   }, [images, sortOrder])
+
+  // Calculate responsive column count
+  const calculateColumnCount = useCallback(() => {
+    if (!containerRef.current) return 1
+
+    const containerWidth = containerRef.current.offsetWidth
+    if (containerWidth >= 1280) return 4 // xl
+    if (containerWidth >= 1024) return 3 // lg
+    if (containerWidth >= 640) return 2 // sm
+    return 1
+  }, [])
+
+  // Arrange images into masonry columns (maintains horizontal ordering)
+  const arrangeMasonryColumns = useCallback((images: GalleryImage[], cols: number) => {
+    if (cols <= 0) return []
+
+    // Initialize columns
+    const columns: GalleryImage[][] = Array(cols)
+      .fill(null)
+      .map(() => [])
+    const columnHeights = Array(cols).fill(0)
+
+    // Distribute images to shortest column (maintains order)
+    images.forEach((image) => {
+      // Find column with minimum height
+      const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights))
+
+      // Add image to shortest column
+      columns[shortestColumnIndex].push(image)
+
+      // Update column height (approximate based on aspect ratio)
+      const aspectRatio = image.width / image.height
+      const estimatedHeight = 300 / aspectRatio // Base width of ~300px
+      columnHeights[shortestColumnIndex] += estimatedHeight + 24 // Add gap
+    })
+
+    return columns
+  }, [])
+
+  // Update column count on resize
+  useEffect(() => {
+    const handleResize = () => {
+      const newColumnCount = calculateColumnCount()
+      if (newColumnCount !== columnCount) {
+        setColumnCount(newColumnCount)
+      }
+    }
+
+    handleResize() // Initial calculation
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [calculateColumnCount, columnCount])
+
+  // Update masonry layout when images or column count changes
+  useEffect(() => {
+    const columns = arrangeMasonryColumns(sortedImages, columnCount)
+    setMasonryColumns(columns)
+  }, [sortedImages, columnCount, arrangeMasonryColumns])
 
   // Convert to lightbox slides format (maintain original order for lightbox)
   const lightboxSlides = useMemo(
@@ -64,13 +126,17 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
   }, [])
 
   const handlePhotoClick = useCallback(
-    (photoIndex: number, imageSrc: string) => {
+    (imageSrc: string) => {
       // Only allow lightbox if image is fully loaded
       if (loadedImages.has(imageSrc)) {
-        setIndex(photoIndex)
+        // Find the index in sortedImages for lightbox
+        const photoIndex = sortedImages.findIndex((img) => img.src === imageSrc)
+        if (photoIndex !== -1) {
+          setIndex(photoIndex)
+        }
       }
     },
-    [loadedImages]
+    [loadedImages, sortedImages]
   )
 
   const handleSortChange = useCallback((value: SortOrder) => {
@@ -90,6 +156,42 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
                   <span>Back to Portfolio</span>
                 </Link>
               </Button>
+            </div>
+
+            <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-3">
+              <button
+                className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md px-2 py-1 transition-colors duration-200 hover:opacity-80"
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "smooth" })
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                }}
+                aria-label="Go to top of gallery page"
+              >
+                <div className="w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-500 to-purple-600 p-1">
+                  <Image
+                    src="/logo-smaller-white.png"
+                    alt="Shayan Yousefian Logo"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain rounded-md block dark:hidden"
+                  />
+                  <Image
+                    src="/logo-smaller.png"
+                    alt="Shayan Yousefian Logo"
+                    width={32}
+                    height={32}
+                    className="w-full h-full object-contain rounded-md hidden dark:block"
+                  />
+                </div>
+                <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Gallery
+                </span>
+              </button>
             </div>
 
             <div className="flex items-center space-x-4">
@@ -134,28 +236,33 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
 
         {/* Photo Gallery */}
         {images.length > 0 ? (
-          <div className="relative">
-            {/* CSS-based responsive masonry grid */}
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 sm:gap-4 md:gap-6">
-              {sortedImages.map((image, imageIndex) => (
-                <div key={image.src} className="break-inside-avoid mb-3 sm:mb-4 md:mb-6">
-                  <div className="relative">
-                    <OptimizedImage
-                      src={image.src}
-                      alt={image.alt}
-                      width={image.width}
-                      height={image.height}
-                      blurDataURL={image.blurDataURL}
-                      onLoad={() => handleImageLoad(image.src)}
-                      onClick={() => handlePhotoClick(imageIndex, image.src)}
-                      className="w-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
-                      priority={imageIndex < 6} // Prioritize first 6 images
-                    />
-                    {/* Year caption */}
-                    <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
-                      {image.createdAt.getFullYear()}
-                    </div>
-                  </div>
+          <div className="relative" ref={containerRef}>
+            {/* JavaScript-based masonry grid (maintains horizontal ordering) */}
+            <div className="flex gap-3 sm:gap-4 md:gap-6 items-start">
+              {masonryColumns.map((column, columnIndex) => (
+                <div key={columnIndex} className="flex-1 flex flex-col gap-3 sm:gap-4 md:gap-6">
+                  {column.map((image) => {
+                    const originalIndex = sortedImages.findIndex((img) => img.src === image.src)
+                    return (
+                      <div key={image.src} className="relative">
+                        <OptimizedImage
+                          src={image.src}
+                          alt={image.alt}
+                          width={image.width}
+                          height={image.height}
+                          blurDataURL={image.blurDataURL}
+                          onLoad={() => handleImageLoad(image.src)}
+                          onClick={() => handlePhotoClick(image.src)}
+                          className="w-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                          priority={originalIndex < 6} // Prioritize first 6 images
+                        />
+                        {/* Year caption */}
+                        <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
+                          {image.createdAt.getFullYear()}
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
               ))}
             </div>
