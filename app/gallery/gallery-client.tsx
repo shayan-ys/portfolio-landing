@@ -1,10 +1,7 @@
 "use client"
 
 import { useState, useCallback, useMemo, useEffect, useRef } from "react"
-import Image from "next/image"
 import Link from "next/link"
-import { MasonryPhotoAlbum } from "react-photo-album"
-import "react-photo-album/masonry.css"
 import Lightbox from "yet-another-react-lightbox"
 import "yet-another-react-lightbox/styles.css"
 
@@ -23,7 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { ArrowLeft, Grid3X3, Clock, ArrowUpDown } from "lucide-react"
+import { Label } from "@/components/ui/label"
+import { ArrowLeft, Grid3X3, ArrowUpDown } from "lucide-react"
+import OptimizedImage from "@/components/lazy-image"
 import type { GalleryImage } from "@/lib/image-utils"
 
 interface GalleryClientProps {
@@ -34,9 +33,9 @@ type SortOrder = "newest" | "oldest"
 
 const GalleryClient = ({ images }: GalleryClientProps) => {
   const [index, setIndex] = useState(-1)
-  const [isLoading, setIsLoading] = useState(false)
   const [sortOrder, setSortOrder] = useState<SortOrder>("newest")
-  const captionTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
+  const [windowWidth, setWindowWidth] = useState(1200) // Default for SSR
 
   // Sort images based on selected order
   const sortedImages = useMemo(() => {
@@ -48,20 +47,6 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
       }
     })
   }, [images, sortOrder])
-
-  // Convert gallery images to react-photo-album format
-  const photoAlbumImages = useMemo(
-    () =>
-      sortedImages.map((image) => ({
-        src: image.src,
-        width: image.width,
-        height: image.height,
-        alt: image.alt,
-        blurDataURL: image.blurDataURL,
-        year: image.createdAt.getFullYear(),
-      })),
-    [sortedImages]
-  )
 
   // Convert to lightbox slides format (maintain original order for lightbox)
   const lightboxSlides = useMemo(
@@ -75,91 +60,74 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
     [sortedImages]
   )
 
-  const handlePhotoClick = useCallback(({ index: photoIndex }: { index: number }) => {
-    setIndex(photoIndex)
+  const handleImageLoad = useCallback((imageSrc: string) => {
+    setLoadedImages((prev) => new Set(prev).add(imageSrc))
   }, [])
+
+  const handlePhotoClick = useCallback(
+    (photoIndex: number, imageSrc: string) => {
+      // Only allow lightbox if image is fully loaded
+      if (loadedImages.has(imageSrc)) {
+        setIndex(photoIndex)
+      }
+    },
+    [loadedImages]
+  )
 
   const handleSortChange = useCallback((value: SortOrder) => {
     setSortOrder(value)
   }, [])
 
-  // Add year captions after gallery renders using robust matching
+  // Calculate masonry layout to maintain proper ordering (row-first, not column-first)
+  const masonryLayout = useMemo(() => {
+    const getColumnCount = (width: number) => {
+      if (width < 640) return 1
+      if (width < 1024) return 2
+      if (width < 1536) return 3
+      return 4
+    }
+
+    const columnCount = getColumnCount(windowWidth)
+    const columns: Array<{ images: typeof sortedImages; height: number }> = []
+
+    // Initialize columns
+    for (let i = 0; i < columnCount; i++) {
+      columns.push({ images: [], height: 0 })
+    }
+
+    // Distribute images to columns (shortest column first to maintain balance)
+    sortedImages.forEach((image) => {
+      // Find the column with the least height
+      const shortestColumnIndex = columns.reduce((minIndex, column, index) => {
+        return columns[minIndex].height > column.height ? index : minIndex
+      }, 0)
+
+      // Add image to the shortest column
+      columns[shortestColumnIndex].images.push(image)
+      // Estimate height based on aspect ratio (for better column balance)
+      const aspectRatio = image.height / image.width
+      columns[shortestColumnIndex].height += aspectRatio * 300 // Base width estimate
+    })
+
+    return columns
+  }, [sortedImages, windowWidth])
+
+  // Set initial window width and handle resize
   useEffect(() => {
-    const addYearCaptions = () => {
-      // First, remove any existing captions
-      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
-
-      // Find all photo containers
-      const photoElements = document.querySelectorAll(".react-photo-album--photo img")
-
-      photoElements.forEach((img, index) => {
-        const imgElement = img as HTMLImageElement
-        const container = imgElement.closest(".react-photo-album--photo") as HTMLElement
-
-        if (container && imgElement.src && sortedImages.length > 0) {
-          let matchingImage = null
-
-          // Strategy 1: Try matching by path ending (handles domain differences)
-          if (!matchingImage) {
-            const domPath = imgElement.src.split("/").slice(-2).join("/") // Get last 2 parts of path
-            matchingImage = sortedImages.find((image) => image.src.endsWith(domPath))
-          }
-
-          // Strategy 2: Use alt attribute matching if available
-          if (!matchingImage && imgElement.alt) {
-            matchingImage = sortedImages.find((image) => image.alt === imgElement.alt)
-          }
-
-          // Get the year from matched image or use current year as fallback
-          if (matchingImage) {
-            const year = matchingImage.createdAt.getFullYear()
-
-            // Create year caption element
-            const caption = document.createElement("div")
-            caption.className = "year-caption"
-            caption.style.cssText =
-              "position: absolute; bottom: 8px; right: 8px; background: rgba(0, 0, 0, 0.5); color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; z-index: 10; backdrop-filter: blur(4px);"
-            caption.textContent = year.toString()
-
-            // Make container relative and add caption
-            container.style.position = "relative"
-            container.appendChild(caption)
-          }
-        }
-      })
+    const updateWindowWidth = () => {
+      setWindowWidth(window.innerWidth)
     }
 
-    // Clear any existing timer
-    if (captionTimerRef.current) {
-      clearTimeout(captionTimerRef.current)
-    }
+    // Set initial width
+    updateWindowWidth()
 
-    // Add captions after a delay to ensure gallery is rendered
-    captionTimerRef.current = setTimeout(addYearCaptions, 500)
-
-    // Handle window resize - re-add captions after masonry re-renders
-    const handleResize = () => {
-      // Clear existing timer and captions
-      if (captionTimerRef.current) {
-        clearTimeout(captionTimerRef.current)
-      }
-      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
-
-      // Re-add captions after masonry finishes re-rendering
-      captionTimerRef.current = setTimeout(addYearCaptions, 300)
-    }
-
-    window.addEventListener("resize", handleResize)
+    // Add resize listener
+    window.addEventListener("resize", updateWindowWidth)
 
     return () => {
-      if (captionTimerRef.current) {
-        clearTimeout(captionTimerRef.current)
-      }
-      window.removeEventListener("resize", handleResize)
-      // Clean up captions when component unmounts or dependencies change
-      document.querySelectorAll(".year-caption").forEach((caption) => caption.remove())
+      window.removeEventListener("resize", updateWindowWidth)
     }
-  }, [sortedImages, sortOrder]) // Re-run when images or sort order changes
+  }, [])
 
   return (
     <div className="min-h-screen bg-background">
@@ -216,21 +184,38 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
           </p>
         </div>
 
-        {/* Photo Album */}
+        {/* Photo Gallery */}
         {images.length > 0 ? (
           <div className="relative">
-            <MasonryPhotoAlbum
-              photos={photoAlbumImages}
-              columns={(containerWidth) => {
-                if (containerWidth < 640) return 1
-                if (containerWidth < 1024) return 2
-                if (containerWidth < 1536) return 3
-                return 4
-              }}
-              spacing={6}
-              padding={0}
-              onClick={handlePhotoClick}
-            />
+            {/* Proper Masonry Grid (row-first ordering) */}
+            <div className="flex gap-3 sm:gap-4 md:gap-6 items-start">
+              {masonryLayout.map((column, columnIndex) => (
+                <div key={columnIndex} className="flex-1 space-y-3 sm:space-y-4 md:space-y-6">
+                  {column.images.map((image) => {
+                    const originalIndex = sortedImages.findIndex((img) => img.src === image.src)
+                    return (
+                      <div key={image.src} className="relative">
+                        <OptimizedImage
+                          src={image.src}
+                          alt={image.alt}
+                          width={image.width}
+                          height={image.height}
+                          blurDataURL={image.blurDataURL}
+                          onLoad={() => handleImageLoad(image.src)}
+                          onClick={() => handlePhotoClick(originalIndex, image.src)}
+                          className="w-full rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300"
+                          priority={originalIndex < 6} // Prioritize first 6 images
+                        />
+                        {/* Year caption */}
+                        <div className="absolute bottom-2 right-2 bg-black/50 text-white px-2 py-1 rounded text-xs font-medium backdrop-blur-sm">
+                          {image.createdAt.getFullYear()}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <div className="text-center py-16">

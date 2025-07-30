@@ -1,13 +1,14 @@
 import exifr from "exifr"
 import { readdir, stat } from "fs/promises"
 import { join } from "path"
+import sharp from "sharp"
 
 export interface GalleryImage {
   src: string
   alt: string
   width: number
   height: number
-  blurDataURL?: string
+  blurDataURL: string
   createdAt: Date
   fileName: string
 }
@@ -113,13 +114,14 @@ export const getImageCreationDate = async (imagePath: string, fileName: string):
 
 // Generate a blur placeholder data URL (simplified version)
 export const generateBlurDataURL = (width: number, height: number): string => {
-  // Create a simple SVG blur placeholder
+  // Create a simple SVG blur placeholder with a subtle gradient
   const svg = `
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:rgb(200,200,200);stop-opacity:0.3" />
-          <stop offset="100%" style="stop-color:rgb(240,240,240);stop-opacity:0.3" />
+          <stop offset="0%" style="stop-color:rgb(230,230,230);stop-opacity:0.8" />
+          <stop offset="50%" style="stop-color:rgb(240,240,240);stop-opacity:0.6" />
+          <stop offset="100%" style="stop-color:rgb(220,220,220);stop-opacity:0.8" />
         </linearGradient>
       </defs>
       <rect width="100%" height="100%" fill="url(#grad)" />
@@ -129,7 +131,13 @@ export const generateBlurDataURL = (width: number, height: number): string => {
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`
 }
 
-// Get all gallery images with metadata
+// Note: Remote blur generation commented out since we're using local images only
+// If needed for remote images, use a simple SVG placeholder instead of Sharp
+// export const generateRemoteBlurDataURL = async (imageUrl: string): Promise<string> => {
+//   return generateBlurDataURL(400, 300) // Use default dimensions for remote images
+// }
+
+// Get all gallery images with metadata and blur data URLs
 export const getGalleryImages = async (): Promise<GalleryImage[]> => {
   const galleryDir = join(process.cwd(), "public", "gallery")
 
@@ -165,11 +173,15 @@ export const getGalleryImages = async (): Promise<GalleryImage[]> => {
       } catch (error) {
         console.error(`Error processing image ${fileName}:`, error)
         // Still add the image with fallback data
+        const fallbackBlurDataURL =
+          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOsa2yqBwAFCAICLICSyQAAAABJRU5ErkJggg=="
+
         images.push({
           src: publicPath,
           alt: `Gallery image ${fileName}`,
           width: 1600,
           height: 1200,
+          blurDataURL: fallbackBlurDataURL,
           createdAt: new Date(),
           fileName,
         })
