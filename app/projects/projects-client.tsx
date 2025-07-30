@@ -104,7 +104,8 @@ export default function ProjectsClient() {
                 className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span className="font-medium">Back to Home</span>
+                <span className="hidden sm:inline font-medium">Back to Home</span>
+                <span className="sm:hidden font-medium">Home</span>
               </Link>
             </div>
 
@@ -142,7 +143,7 @@ export default function ProjectsClient() {
                     className="w-full h-full object-contain rounded-md hidden dark:block"
                   />
                 </div>
-                <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="hidden sm:inline font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Projects
                 </span>
               </button>
