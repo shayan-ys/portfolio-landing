@@ -38,6 +38,7 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set())
   const [masonryColumns, setMasonryColumns] = useState<GalleryImage[][]>([])
   const [columnCount, setColumnCount] = useState(1)
+  const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Sort images based on selected order
@@ -89,19 +90,25 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
     return columns
   }, [])
 
-  // Update column count on resize
+  // Update column count and mobile detection on resize
   useEffect(() => {
     const handleResize = () => {
       const newColumnCount = calculateColumnCount()
       if (newColumnCount !== columnCount) {
         setColumnCount(newColumnCount)
       }
+
+      // Check if screen is mobile (less than 640px - sm breakpoint)
+      const mobile = window.innerWidth < 640
+      if (mobile !== isMobile) {
+        setIsMobile(mobile)
+      }
     }
 
     handleResize() // Initial calculation
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
-  }, [calculateColumnCount, columnCount])
+  }, [calculateColumnCount, columnCount, isMobile])
 
   // Update masonry layout when images or column count changes
   useEffect(() => {
@@ -334,8 +341,8 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
         }}
         // Render settings
         render={{
-          buttonPrev: images.length <= 1 ? () => null : undefined,
-          buttonNext: images.length <= 1 ? () => null : undefined,
+          buttonPrev: images.length <= 1 || isMobile ? () => null : undefined,
+          buttonNext: images.length <= 1 || isMobile ? () => null : undefined,
         }}
         // Styles for mobile optimization
         styles={{
