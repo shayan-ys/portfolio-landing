@@ -22,6 +22,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Grid3X3, ArrowUpDown } from "lucide-react"
 import OptimizedImage from "@/components/lazy-image"
+import { ThemeToggle } from "@/components/theme-toggle"
 import type { GalleryImage } from "@/lib/image-utils"
 
 interface GalleryClientProps {
@@ -224,6 +225,8 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
                   </SelectContent>
                 </Select>
               </div>
+
+              <ThemeToggle />
             </div>
           </div>
         </div>

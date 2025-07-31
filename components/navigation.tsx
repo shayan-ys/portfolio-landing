@@ -108,12 +108,22 @@ export const Navigation = () => {
                 className="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md p-1"
                 aria-label="Go to top of page"
               >
+                {/* Light mode logo */}
                 <Image
                   src="/logo-smallest.png"
                   alt="Shayan Yousefian Logo"
                   width={40}
                   height={40}
-                  className="rounded-full"
+                  className="rounded-full dark:hidden"
+                  priority
+                />
+                {/* Dark mode logo */}
+                <Image
+                  src="/logo-smaller-white.png"
+                  alt="Shayan Yousefian Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-full hidden dark:block"
                   priority
                 />
                 <span className="text-xl font-bold text-foreground hidden sm:block">
