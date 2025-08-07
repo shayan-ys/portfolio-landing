@@ -160,7 +160,7 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
       <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-md border-b shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <Button variant="ghost" size="sm" asChild>
                 <Link href="/" className="flex items-center space-x-2">
                   <ArrowLeft className="h-4 w-4" />
@@ -216,8 +216,8 @@ const GalleryClient = ({ images }: GalleryClientProps) => {
               <div className="flex items-center space-x-2">
                 <ArrowUpDown className="hidden sm:block h-4 w-4 text-muted-foreground" />
                 <Select value={sortOrder} onValueChange={handleSortChange}>
-                  <SelectTrigger className="w-32 h-8 text-sm">
-                    <SelectValue />
+                  <SelectTrigger className="w-24 sm:w-32 h-8 text-sm px-2 sm:px-3">
+                    <SelectValue placeholder="Newest" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="newest">Newest</SelectItem>
