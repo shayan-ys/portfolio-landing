@@ -608,6 +608,53 @@ export const projects: ProjectData[] = [
     demoUrl: "/projects/funplanner",
     category: "Mobile Application",
   },
+  {
+    id: "g1-fun",
+    icon: GraduationCap,
+    title: "G1 in a Day",
+    company: "Personal Project",
+    description:
+      "A condensed, slightly unhinged study guide for Ontario's G1 driver knowledge test, built for short-attention-span learners.",
+    longDescription:
+      "A single-file, self-contained study webpage covering the entire Ontario G1 written test syllabus — rules of the road, traffic signs, G1 restrictions, demerit points, and test-day logistics. Written in a chatty, gen-z-girl voice with neo-brutalist driver's-ed-zine aesthetics: cream paper backgrounds, cherry-red and highway-yellow accents, chunky display fonts, and inline SVG sign illustrations. Features tabbed study sections, an interactive 10-question quiz with scored feedback, expandable trick-question accordion, and a TL;DR cheat sheet for night-before panic mode. Built with multi-agent research pipelines: parallel sonnet teammates surveyed MTO Driver's Handbook + drivetest.ca + reputable prep sites, then a fact-checker verified every numeric claim against the research, an Opus accessibility lead audited contrast, and an Opus coverage lead identified and patched gaps. All facts cross-referenced against ontario.ca official sources, May 2026.",
+    impact:
+      "Condenses ~80 pages of MTO Driver's Handbook into a single scrollable page tuned for visual learners and short attention spans.",
+    technologies: [
+      "HTML",
+      "CSS",
+      "Vanilla JavaScript",
+      "Inline SVG",
+      "Google Fonts",
+      "Multi-agent AI research",
+    ],
+    metrics: [
+      "1500 lines, single file",
+      "10-question interactive quiz",
+      "16+ inline SVG signs",
+      "Zero external JS dependencies",
+    ],
+    color: "from-rose-500 to-amber-500",
+    images: ["/projects/g1-fun-screenshot.png"],
+    timeline: "May 2026",
+    teamSize: "Solo, with multi-agent research pipeline",
+    keyFeatures: [
+      "Tabbed study sections: Rules of the Road, Behind the Wheel, G1-Specific, Penalties",
+      "Inline SVG sign gallery with 16+ Ontario road signs",
+      "Interactive 10-question quiz with instant feedback and scored result",
+      "Expandable trick-question accordion covering common test-day confusions",
+      "TL;DR cheat sheet for night-before-the-test review",
+      "Fact-checked against MTO Official Driver's Handbook and ontario.ca sources",
+      "WCAG AA contrast-audited; readable on dark and light card backgrounds",
+      "100% self-contained — single HTML file, fonts via Google CDN",
+    ],
+    outcomes: [
+      "Single-file deliverable, easy to share via email or AirDrop",
+      "Cross-referenced against three independent research surveys",
+      "Coverage spans every topic in the 40-question Ontario G1 written test",
+    ],
+    demoUrl: "/g1-fun/index.html",
+    category: "Web Application",
+  },
 ]
 
 export const categories = [
