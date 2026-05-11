@@ -652,7 +652,7 @@ export const projects: ProjectData[] = [
       "Cross-referenced against three independent research surveys",
       "Coverage spans every topic in the 40-question Ontario G1 written test",
     ],
-    demoUrl: "/g1-fun/index.html",
+    demoUrl: "/g1-fun",
     category: "Web Application",
   },
 ]
