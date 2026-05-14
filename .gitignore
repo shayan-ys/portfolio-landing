@@ -27,3 +27,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# pnpm — workspace file is a local stub from `pnpm install` build-script prompts
+pnpm-workspace.yaml
+
